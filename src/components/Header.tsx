@@ -2,9 +2,19 @@
 import Link from "next/link";
 import { Search, ShoppingCart } from "lucide-react";
 import { useCart } from "./CartProvider";
+import { usePathname } from "next/navigation";
 
 export default function Header() {
   const { toggleCart } = useCart();
+  const pathname = usePathname();
+
+  const navLinks = [
+    { name: "Home", href: "/" },
+    { name: "Stack", href: "/stack" },
+    { name: "Prisma", href: "/prisma" },
+    { name: "Journal", href: "/blog" },
+    { name: "About", href: "/about" },
+  ];
 
   return (
     <header className="sticky top-0 z-50 bg-brand-cream/90 backdrop-blur-md border-b border-brand-charcoal/10">
@@ -17,11 +27,22 @@ export default function Header() {
         </Link>
         
         <nav className="hidden md:flex items-center gap-8 font-medium text-sm">
-          <Link href="/" className="hover:text-brand-green transition-colors">Home</Link>
-          <Link href="/stack" className="hover:text-brand-green transition-colors">Stack</Link>
-          <Link href="/prisma" className="hover:text-brand-green transition-colors">Prisma</Link>
-          <Link href="/blog" className="hover:text-brand-green transition-colors">Journal</Link>
-          <Link href="/about" className="hover:text-brand-green transition-colors">About</Link>
+          {navLinks.map((link) => {
+            const isActive = pathname === link.href;
+            return (
+              <Link 
+                key={link.name}
+                href={link.href} 
+                className={`relative transition-colors ${
+                  isActive 
+                    ? "text-brand-green font-semibold after:absolute after:-bottom-1 after:left-0 after:w-full after:h-0.5 after:bg-brand-green" 
+                    : "text-brand-charcoal/70 hover:text-brand-charcoal"
+                }`}
+              >
+                {link.name}
+              </Link>
+            );
+          })}
         </nav>
 
         <div className="flex items-center gap-4">
