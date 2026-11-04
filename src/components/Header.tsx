@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { Search, ShoppingCart } from "lucide-react";
-import { useCart } from "./CartProvider"; // We will make this next
+import { useCart } from "./CartProvider";
 
 export default function Header() {
   const { toggleCart } = useCart();
