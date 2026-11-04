@@ -1,11 +1,14 @@
+/* src/app/globals.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --paper: #fafaf8;
-  --ink: #0a0a0a;
-  --accent: #a51f27;
+  /* New stackprisma palette */
+  --brand-cream: #f8f6f0;
+  --brand-charcoal: #1a1a1a;
+  --brand-green: #112e25;
+  --brand-peach: #f4cfc3;
 }
 
 html {
@@ -16,28 +19,29 @@ html {
 
 body {
   margin: 0;
-  background: var(--paper);
-  color: var(--ink);
-  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  background: var(--brand-cream);
+  color: var(--brand-charcoal);
+  font-family: var(--font-inter), Arial, Helvetica, sans-serif;
 }
 
-/* Editorial serif – used for all big titles */
+/* Elegant serif mapped to Playfair Display */
 .font-editorial {
-  font-family: var(--font-serif), "Bodoni MT", Didot, "Times New Roman", Georgia, serif;
+  font-family: var(--font-playfair), Georgia, serif;
   font-weight: 400;
   font-optical-sizing: auto;
 }
 
-/* Selection color */
+/* Selection color (using the new forest green) */
 ::selection {
-  background: var(--accent);
-  color: #fff;
+  background: var(--brand-green);
+  color: var(--brand-cream);
 }
 
 /* Basic resets */
 img {
   display: block;
   max-width: 100%;
+  /* REMOVED the grayscale/contrast filter so your warm images show in full color */
 }
 
 button,
@@ -75,33 +79,12 @@ button {
     scroll-behavior: auto !important;
   }
 }
-/* Editorial High-Contrast Black & White */
-/* =========================================
-   GLOBAL EDITORIAL IMAGE FILTER
-   Adjust these numbers to change the look!
-   ========================================= */
-   img {
-    /* 
-       grayscale: 100% = pure B&W | 85% = slight vintage tint 
-       contrast: 1.2+ makes the whites pop and blacks deep
-       brightness: <1.0 makes it moodier/darker | >1.0 makes it brighter
-    */
-    filter: grayscale(100%) contrast(1.9) brightness(0.9);
-  }
-  
-  /* Optional: Use this class if you want a specific image to be darker */
-  .filter-strong {
-    filter: grayscale(100%) contrast(1.35) brightness(0.8);
-  }
-  /* Hide scrollbar for modern carousels */
+
+/* Hide scrollbar for modern carousels (Keep this, it's great for the Popular Picks section) */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
 .no-scrollbar {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
-}
-/* Specific filter for Hero and Highlight cards */
-.hero-editorial-filter {
-  filter: grayscale(94%) contrast(1.8) brightness(0.9) saturate(2.5) !important;
 }
