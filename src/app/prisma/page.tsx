@@ -1,18 +1,17 @@
 import FilterSidebar from "@/components/FilterSidebar";
 import ProductCard from "@/components/ProductCard";
-import { PenTool, ArrowRight, FileText } from "lucide-react";
-import Link from "next/link";
+import { PenTool, FileText } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 
 export const dynamic = 'force-dynamic';
 
-// Color mappings for Prisma
-const sectionStyles: Record<string, { bg: string, text: string, pillBg: string, pillText: string }> = {
-  '3D Revamp': { bg: 'bg-[#fdfaf5]', text: 'text-brand-charcoal', pillBg: 'bg-[#f4cfc3]', pillText: 'text-brand-charcoal' },
-  'Planner': { bg: 'bg-[#f0f4f1]', text: 'text-brand-green', pillBg: 'bg-[#e6eee6]', pillText: 'text-brand-green' },
-  'Journal': { bg: 'bg-[#f0f4f1]', text: 'text-brand-green', pillBg: 'bg-[#e6eee6]', pillText: 'text-brand-green' },
-  'Coloring Book': { bg: 'bg-[#f4f4f8]', text: 'text-brand-charcoal', pillBg: 'bg-[#e6e6f0]', pillText: 'text-brand-charcoal' },
-  'Default': { bg: 'bg-brand-light', text: 'text-brand-charcoal', pillBg: 'bg-brand-charcoal', pillText: 'text-brand-cream' }
+// Unique colors for each Prisma section
+const sectionStyles: Record<string, { bg: string, pillBg: string, pillText: string }> = {
+  '3D Revamp': { bg: 'bg-[#f5efe6]', pillBg: 'bg-[#8c6a4d]', pillText: 'text-white' }, // Warm Mocha
+  'Planner': { bg: 'bg-[#e6ede8]', pillBg: 'bg-[#2d4a36]', pillText: 'text-white' }, // Forest Sage
+  'Journal': { bg: 'bg-[#f7ecee]', pillBg: 'bg-[#9e5d6b]', pillText: 'text-white' }, // Dusty Rose
+  'Coloring Book': { bg: 'bg-[#e9edf2]', pillBg: 'bg-[#4a5568]', pillText: 'text-white' }, // Ice Blue
+  'Default': { bg: 'bg-brand-light', pillBg: 'bg-brand-charcoal', pillText: 'text-brand-cream' }
 };
 
 export default async function PrismaPage() {
@@ -23,7 +22,6 @@ export default async function PrismaPage() {
     .select('*')
     .eq('is_published', true);
 
-  // Filter purely for Prisma items
   const products = allProducts?.filter(product => {
     const tags = product.tags || [];
     return tags.includes('3D Revamp') || tags.includes('Planner') || tags.includes('Journal') || tags.includes('Coloring Book');
@@ -57,20 +55,17 @@ export default async function PrismaPage() {
             const style = sectionStyles[category] || sectionStyles['Default'];
             
             return (
-              <section key={category} className={`${style.bg} p-6 lg:p-8 rounded-3xl`}>
+              <section key={category} className={`${style.bg} p-6 lg:p-8 rounded-3xl transition-colors duration-300`}>
                 
-                {/* Colored Section Header */}
-                <div className="flex justify-between items-center mb-6 pb-2">
-                  <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full ${style.pillBg} ${style.pillText}`}>
+                {/* Section Header - No "View all" link */}
+                <div className="mb-6 pb-2">
+                  <div className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full ${style.pillBg} ${style.pillText}`}>
                     <FileText className="w-4 h-4" />
                     <h2 className="text-sm font-bold tracking-wider uppercase">{category}s</h2>
                   </div>
-                  <Link href={`/shop?tag=${category}`} className="text-sm font-medium text-brand-charcoal/60 hover:text-brand-green flex items-center gap-1 transition-colors">
-                    View all <ArrowRight className="w-4 h-4" />
-                  </Link>
                 </div>
                 
-                {/* Horizontal Carousel */}
+                {/* Carousel (9 cards) - Shows 3 at a time on desktop */}
                 <div className="flex overflow-x-auto gap-6 snap-x snap-mandatory no-scrollbar pb-4">
                   {items.map((product: any) => (
                     <div key={product.id} className="snap-start shrink-0 w-[85vw] sm:w-[300px] lg:w-[calc(33.333%-1rem)]">
