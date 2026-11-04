@@ -3,7 +3,6 @@ import { ChevronDown, LayoutGrid, Code2, PenTool, FileText, Paintbrush } from "l
 
 export default function FilterSidebar({ type = 'all' }: { type?: 'all' | 'stack' | 'prisma' }) {
   
-  // Define categories based on the page type
   const categories = {
     all: [
       { name: "Stack Products", count: 10, icon: <Code2 className="w-4 h-4" /> },
@@ -24,7 +23,8 @@ export default function FilterSidebar({ type = 'all' }: { type?: 'all' | 'stack'
   const activeCategories = categories[type] || categories.all;
 
   return (
-    <aside className="w-full md:w-64 flex-shrink-0 space-y-8">
+    // ADDED: sticky top-24 h-fit
+    <aside className="w-full md:w-64 flex-shrink-0 sticky top-24 h-fit space-y-8">
       <div>
         <h3 className="text-xs font-bold tracking-widest uppercase mb-4 text-brand-charcoal/50 flex justify-between items-center">
           Shop by Category <ChevronDown className="w-4 h-4" />
