@@ -2,8 +2,13 @@ import FilterSidebar from "@/components/FilterSidebar";
 import ProductCard from "@/components/ProductCard";
 import { createClient } from "@/lib/supabase/server";
 
+// This forces Next.js to fetch fresh data from Supabase on every request
+export const dynamic = 'force-dynamic';
+
 export default async function ShopPage() {
   const supabase = createClient();
+  
+  // Fetch all published products
   const { data: products } = await supabase
     .from('products')
     .select('*')
