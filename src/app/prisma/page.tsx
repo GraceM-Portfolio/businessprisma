@@ -1,9 +1,19 @@
 import FilterSidebar from "@/components/FilterSidebar";
 import ProductCard from "@/components/ProductCard";
-import { PenTool } from "lucide-react";
+import { PenTool, ArrowRight, FileText } from "lucide-react";
+import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 
 export const dynamic = 'force-dynamic';
+
+// Color mappings for Prisma
+const sectionStyles: Record<string, { bg: string, text: string, pillBg: string, pillText: string }> = {
+  '3D Revamp': { bg: 'bg-[#fdfaf5]', text: 'text-brand-charcoal', pillBg: 'bg-[#f4cfc3]', pillText: 'text-brand-charcoal' },
+  'Planner': { bg: 'bg-[#f0f4f1]', text: 'text-brand-green', pillBg: 'bg-[#e6eee6]', pillText: 'text-brand-green' },
+  'Journal': { bg: 'bg-[#f0f4f1]', text: 'text-brand-green', pillBg: 'bg-[#e6eee6]', pillText: 'text-brand-green' },
+  'Coloring Book': { bg: 'bg-[#f4f4f8]', text: 'text-brand-charcoal', pillBg: 'bg-[#e6e6f0]', pillText: 'text-brand-charcoal' },
+  'Default': { bg: 'bg-brand-light', text: 'text-brand-charcoal', pillBg: 'bg-brand-charcoal', pillText: 'text-brand-cream' }
+};
 
 export default async function PrismaPage() {
   const supabase = await createClient();
@@ -13,14 +23,14 @@ export default async function PrismaPage() {
     .select('*')
     .eq('is_published', true);
 
-  // Filter for Prisma products in JavaScript
+  // Filter purely for Prisma items
   const products = allProducts?.filter(product => {
     const tags = product.tags || [];
     return tags.includes('3D Revamp') || tags.includes('Planner') || tags.includes('Journal') || tags.includes('Coloring Book');
   }) || [];
 
   const groupedProducts = products.reduce((acc: any, product) => {
-    const category = product.tags?.[0] || 'Other Designs';
+    let category = product.tags?.[0] || 'Other Designs';
     if (!acc[category]) acc[category] = [];
     acc[category].push(product);
     return acc;
@@ -39,30 +49,39 @@ export default async function PrismaPage() {
         </p>
       </div>
 
-      <div className="flex flex-col md:flex-row gap-12">
+      <div className="flex flex-col md:flex-row gap-12 items-start">
         <FilterSidebar type="prisma" />
-        <div className="flex-1 space-y-16">
-          {Object.keys(groupedProducts).length === 0 ? (
-             <p className="text-brand-charcoal/50">No products found.</p>
-          ) : (
-            Object.entries(groupedProducts).map(([category, items]: [string, any]) => (
-              <section key={category}>
-                <div className="flex justify-between items-center mb-6 pb-4 border-b border-brand-charcoal/10">
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded bg-[#f4f1ea] flex items-center justify-center text-brand-charcoal">
-                      <PenTool className="w-4 h-4" />
-                    </div>
-                    <h2 className="text-2xl font-serif">{category}s</h2>
+        
+        <div className="flex-1 space-y-12 w-full overflow-hidden">
+          {Object.entries(groupedProducts).map(([category, items]: [string, any]) => {
+            const style = sectionStyles[category] || sectionStyles['Default'];
+            
+            return (
+              <section key={category} className={`${style.bg} p-6 lg:p-8 rounded-3xl`}>
+                
+                {/* Colored Section Header */}
+                <div className="flex justify-between items-center mb-6 pb-2">
+                  <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full ${style.pillBg} ${style.pillText}`}>
+                    <FileText className="w-4 h-4" />
+                    <h2 className="text-sm font-bold tracking-wider uppercase">{category}s</h2>
                   </div>
+                  <Link href={`/shop?tag=${category}`} className="text-sm font-medium text-brand-charcoal/60 hover:text-brand-green flex items-center gap-1 transition-colors">
+                    View all <ArrowRight className="w-4 h-4" />
+                  </Link>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                {/* Horizontal Carousel */}
+                <div className="flex overflow-x-auto gap-6 snap-x snap-mandatory no-scrollbar pb-4">
                   {items.map((product: any) => (
-                    <ProductCard key={product.id} product={product} />
+                    <div key={product.id} className="snap-start shrink-0 w-[85vw] sm:w-[300px] lg:w-[calc(33.333%-1rem)]">
+                      <ProductCard product={product} />
+                    </div>
                   ))}
                 </div>
+
               </section>
-            ))
-          )}
+            );
+          })}
         </div>
       </div>
     </div>
