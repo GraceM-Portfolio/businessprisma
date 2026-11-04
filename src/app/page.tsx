@@ -149,7 +149,6 @@ export default function Home() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {/* These are placeholders. We will fetch from Supabase next! */}
           {[
             { id: 1, title: "SaaS Dashboard Starter Kit", price: 79, tag: "Stack", description: "Complete Next.js dashboard" },
             { id: 2, title: "3D Living Room Revamp", price: 149, tag: "Prisma", description: "Personalised 3D redesign" },
