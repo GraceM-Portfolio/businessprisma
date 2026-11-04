@@ -10,17 +10,17 @@ export default function PrismaPage() {
           <PenTool className="w-6 h-6" />
           <span className="font-semibold tracking-wider text-sm uppercase">Prisma Collection</span>
         </div>
-        <h1 className="text-4xl lg:text-5xl mb-4">Reimagine your space.</h1>
+        <h1 className="text-4xl lg:text-5xl mb-4 font-serif">Reimagine your space.</h1>
         <p className="text-brand-charcoal/70 max-w-lg">
           Interior design services and creative digital products to help you design beautiful spaces and live inspired.
         </p>
       </div>
 
       <div className="flex flex-col md:flex-row gap-12">
-        <FilterSidebar />
+        <FilterSidebar type="prisma" />
         <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-           {/* Placeholder for Prisma products */}
-           <ProductCard product={{ id: 2, title: "3D Living Room Revamp", description: "Personalised 3D redesign...", price: 149, tags: ['Prisma'] }} />
+           <ProductCard product={{ id: 2, title: "3D Living Room Revamp", description: "Personalised 3D redesign of your space.", price: 149, tags: ['Prisma'] }} />
+           <ProductCard product={{ id: 3, title: "Room Makeover Planner", description: "Plan your dream space with step-by-step guidance.", price: 19, tags: ['Prisma'] }} />
         </div>
       </div>
     </div>
