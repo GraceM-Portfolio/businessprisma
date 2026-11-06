@@ -10,10 +10,12 @@ const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfa
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
-      <body className="bg-brand-cream text-brand-charcoal antialiased min-h-screen flex flex-col">
+      {/* Added overflow-x-hidden to body */}
+      <body className="bg-brand-cream text-brand-charcoal antialiased min-h-screen flex flex-col overflow-x-hidden">
         <CartProvider>
           <Header />
-          <main className="flex-grow">{children}</main>
+          {/* Added w-full max-w-full overflow-hidden to main */}
+          <main className="flex-grow w-full max-w-full overflow-hidden">{children}</main>
           <Footer />
         </CartProvider>
       </body>
