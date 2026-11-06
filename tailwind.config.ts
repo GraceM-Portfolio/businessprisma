@@ -11,11 +11,19 @@ const config: Config = {
     extend: {
       colors: {
         brand: {
-          green: "#112e25",    // Deep forest green
-          cream: "#f8f6f0",    // Warm off-white background
-          peach: "#f4cfc3",    // Soft peach/sand accents
-          charcoal: "#1a1a1a", // Dark text
-          light: "#f0eee6",    // Slightly darker cream for cards/borders
+          green: "#112e25",    
+          cream: "#f8f6f0",    
+          peach: "#f4cfc3",    
+          charcoal: "#1a1a1a", 
+          light: "#f0eee6",    
+        },
+        prisma: {
+          ivory: "#F8F6F1",
+          cream: "#EFEAE1",
+          espresso: "#332820",
+          taupe: "#A99B8B",
+          bronze: "#A17B56",
+          charcoal: "#242321",
         }
       },
       fontFamily: {
