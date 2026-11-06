@@ -1,5 +1,5 @@
 import FilterSidebar from "@/components/FilterSidebar";
-import ProductCarousel from "@/components/ProductCarousel"; // Import the new component
+import ProductCarousel from "@/components/ProductCarousel";
 import { Code2, LayoutGrid } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 
@@ -39,13 +39,14 @@ export default async function StackPage() {
       <div className="flex flex-col md:flex-row gap-12 items-start">
         <FilterSidebar type="stack" />
         
-        {/* REMOVED overflow-hidden here so arrows can pop out slightly */}
-        <div className="flex-1 space-y-12 w-full">
+        <div className="flex-1 space-y-12 w-full min-w-0">
           {Object.entries(groupedProducts).map(([category, items]: [string, any]) => {
             const style = sectionStyles[category] || sectionStyles['Default'];
             return (
-              <section key={category} className={`${style.bg} p-6 lg:p-8 rounded-3xl`}>
-                <div className="mb-6 pb-2 flex justify-between items-end">
+              <section key={category} className={`${style.bg} p-6 lg:p-8 rounded-3xl relative overflow-hidden`}>
+                
+                {/* Header */}
+                <div className="mb-6 pb-2 flex justify-between items-end relative z-10">
                   <div className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full ${style.pillBg} ${style.pillText}`}>
                     <LayoutGrid className="w-4 h-4" />
                     <h2 className="text-sm font-bold tracking-wider uppercase">{category}s</h2>
@@ -55,8 +56,11 @@ export default async function StackPage() {
                   </span>
                 </div>
                 
-                {/* USE THE NEW CAROUSEL COMPONENT */}
+                {/* Carousel */}
                 <ProductCarousel items={items} />
+
+                {/* Subtle Fade on the right to indicate more content */}
+                <div className={`absolute top-0 right-0 w-16 h-full bg-gradient-to-l ${style.bg} to-transparent z-0 pointer-events-none opacity-50`}></div>
 
               </section>
             );
