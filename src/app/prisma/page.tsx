@@ -1,5 +1,5 @@
 import FilterSidebar from "@/components/FilterSidebar";
-import ProductCard from "@/components/ProductCard";
+import ProductCarousel from "@/components/ProductCarousel";
 import { PenTool, FileText } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 
@@ -40,26 +40,24 @@ export default async function PrismaPage() {
       <div className="flex flex-col md:flex-row gap-12 items-start">
         <FilterSidebar type="prisma" />
         
-        <div className="flex-1 space-y-12 w-full overflow-hidden">
+        <div className="flex-1 space-y-12 w-full">
           {Object.entries(groupedProducts).map(([category, items]: [string, any]) => {
             const style = sectionStyles[category] || sectionStyles['Default'];
             return (
               <section key={category} className={`${style.bg} p-6 lg:p-8 rounded-3xl`}>
-                <div className="mb-6 pb-2">
+                <div className="mb-6 pb-2 flex justify-between items-end">
                   <div className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full ${style.pillBg} ${style.pillText}`}>
                     <FileText className="w-4 h-4" />
                     <h2 className="text-sm font-bold tracking-wider uppercase">{category}s</h2>
                   </div>
+                  <span className="text-xs font-semibold text-brand-charcoal/40 uppercase tracking-wider hidden sm:block">
+                    Swipe to explore
+                  </span>
                 </div>
                 
-                {/* The Slider: Shows 3, scrolls for the remaining 3 */}
-                <div className="flex overflow-x-auto gap-6 snap-x snap-mandatory no-scrollbar pb-4">
-                  {items.map((product: any) => (
-                    <div key={product.id} className="snap-start shrink-0 w-[85vw] sm:w-[300px] lg:w-[calc(33.333%-1rem)]">
-                      <ProductCard product={product} />
-                    </div>
-                  ))}
-                </div>
+                {/* USE THE NEW CAROUSEL COMPONENT */}
+                <ProductCarousel items={items} />
+
               </section>
             );
           })}
