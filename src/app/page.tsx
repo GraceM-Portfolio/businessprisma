@@ -4,9 +4,9 @@ import ProductCard from "@/components/ProductCard";
 
 export default function Home() {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col w-full overflow-hidden">
       {/* HERO SECTION */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 grid lg:grid-cols-2 gap-12 items-center">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 grid lg:grid-cols-2 gap-12 items-center w-full">
         <div className="max-w-xl">
           <div className="flex items-center gap-3 text-sm font-semibold tracking-wider text-brand-charcoal/60 uppercase mb-6">
             <span>Stackprisma</span>
@@ -23,7 +23,7 @@ export default function Home() {
             Explore Our Collections <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
-        <div className="relative h-[400px] lg:h-[500px] rounded-2xl overflow-hidden bg-brand-light flex items-center justify-center shadow-lg">
+        <div className="relative h-[400px] lg:h-[500px] rounded-2xl overflow-hidden bg-brand-light flex items-center justify-center shadow-lg w-full">
           <div className="text-brand-charcoal/30 flex flex-col items-center">
             <MonitorPlay className="w-16 h-16 mb-4" />
             <p>Dashboard Mockup Image</p>
@@ -32,7 +32,7 @@ export default function Home() {
       </section>
 
       {/* TWO CATEGORY BLOCKS */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
         <div className="grid lg:grid-cols-2 gap-6">
           {/* Stack Block */}
           <div className="bg-brand-green text-brand-cream p-8 lg:p-12 rounded-3xl relative overflow-hidden flex flex-col justify-between min-h-[400px]">
@@ -99,7 +99,7 @@ export default function Home() {
       </section>
 
       {/* TRUST BADGES */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-b border-brand-charcoal/10">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-b border-brand-charcoal/10 w-full">
         <div className="text-center mb-12">
           <span className="text-xs font-bold tracking-widest text-brand-charcoal/50 uppercase mb-2 block">Why Stackprisma</span>
           <h2 className="text-4xl font-serif">Quality. Creativity. Trust.</h2>
@@ -137,7 +137,7 @@ export default function Home() {
       </section>
 
       {/* POPULAR PICKS */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full">
         <div className="flex justify-between items-end mb-8">
           <div>
             <span className="text-xs font-bold tracking-widest text-brand-charcoal/50 uppercase mb-2 block">Featured Products</span>
@@ -161,7 +161,7 @@ export default function Home() {
       </section>
 
       {/* BOTTOM BANNER */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 mb-12">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 mb-12 w-full">
         <div className="bg-[#f4f1ea] rounded-3xl p-8 lg:p-12 flex flex-col md:flex-row items-center justify-between gap-8">
            <div className="max-w-lg">
               <span className="text-xs font-bold tracking-widest text-brand-charcoal/50 uppercase mb-2 block">Our Vision</span>
