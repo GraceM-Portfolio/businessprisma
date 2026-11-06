@@ -40,12 +40,13 @@ export default async function PrismaPage() {
       <div className="flex flex-col md:flex-row gap-12 items-start">
         <FilterSidebar type="prisma" />
         
-        <div className="flex-1 space-y-12 w-full">
+        <div className="flex-1 space-y-12 w-full min-w-0">
           {Object.entries(groupedProducts).map(([category, items]: [string, any]) => {
             const style = sectionStyles[category] || sectionStyles['Default'];
             return (
-              <section key={category} className={`${style.bg} p-6 lg:p-8 rounded-3xl`}>
-                <div className="mb-6 pb-2 flex justify-between items-end">
+              <section key={category} className={`${style.bg} p-6 lg:p-8 rounded-3xl relative overflow-hidden`}>
+                
+                <div className="mb-6 pb-2 flex justify-between items-end relative z-10">
                   <div className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full ${style.pillBg} ${style.pillText}`}>
                     <FileText className="w-4 h-4" />
                     <h2 className="text-sm font-bold tracking-wider uppercase">{category}s</h2>
@@ -55,8 +56,9 @@ export default async function PrismaPage() {
                   </span>
                 </div>
                 
-                {/* USE THE NEW CAROUSEL COMPONENT */}
                 <ProductCarousel items={items} />
+
+                <div className={`absolute top-0 right-0 w-16 h-full bg-gradient-to-l ${style.bg} to-transparent z-0 pointer-events-none opacity-50`}></div>
 
               </section>
             );
