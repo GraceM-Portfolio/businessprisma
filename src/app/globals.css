@@ -2,14 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --brand-cream: #f8f6f0;
-  --brand-charcoal: #1a1a1a;
-  --brand-green: #112e25;
-  --brand-peach: #f4cfc3;
-}
-
-/* FIX: Prevent horizontal scrolling site-wide */
 html, body {
   max-width: 100vw;
   overflow-x: hidden;
@@ -17,75 +9,11 @@ html, body {
   padding: 0;
 }
 
-html {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  scroll-behavior: smooth;
-}
-
-body {
-  background: var(--brand-cream);
-  color: var(--brand-charcoal);
-  font-family: var(--font-inter), Arial, Helvetica, sans-serif;
-}
-
-/* Elegant serif mapped to Playfair Display */
-.font-editorial {
-  font-family: var(--font-playfair), Georgia, serif;
-  font-weight: 400;
-  font-optical-sizing: auto;
-}
-
-/* Selection color */
-::selection {
-  background: var(--brand-green);
-  color: var(--brand-cream);
-}
-
-/* Basic resets */
-img {
-  display: block;
-  max-width: 100%;
-}
-
-button,
-input,
-textarea,
-select {
-  font: inherit;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-button {
-  cursor: pointer;
-}
-
-* {
-  box-sizing: border-box;
-}
-
 /* Hide scrollbar for modern carousels */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
 .no-scrollbar {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
-}
-
-/* Reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
+  -ms-overflow-style: none;  
+  scrollbar-width: none;  
 }
