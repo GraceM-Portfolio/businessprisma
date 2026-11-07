@@ -10,12 +10,11 @@ const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfa
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
-      {/* Added overflow-x-hidden to body */}
-      <body className="bg-brand-cream text-brand-charcoal antialiased min-h-screen flex flex-col overflow-x-hidden">
+      <body className="bg-brand-cream text-brand-charcoal antialiased min-h-screen flex flex-col">
         <CartProvider>
           <Header />
-          {/* Added w-full max-w-full overflow-hidden to main */}
-          <main className="flex-grow w-full max-w-full overflow-hidden">{children}</main>
+          {/* Added pt-20 to offset the fixed header height. Removed overflow-hidden so sticky works. */}
+          <main className="flex-grow w-full pt-20">{children}</main>
           <Footer />
         </CartProvider>
       </body>
