@@ -5,7 +5,6 @@ import { createClient } from "@/lib/supabase/server";
 
 export const dynamic = 'force-dynamic';
 
-// Unique colors for each PRISMA section using the STACKPRISMA palette
 const sectionStyles: Record<string, { bg: string, pillBg: string, pillText: string, icon: React.ReactNode }> = {
   'Celebrations': { bg: 'bg-[#fdf4ed]', pillBg: 'bg-[#d4a373]', pillText: 'text-white', icon: <Heart className="w-4 h-4" /> }, 
   'Planning': { bg: 'bg-[#e8f0ea]', pillBg: 'bg-[#112e25]', pillText: 'text-[#e8f0ea]', icon: <Compass className="w-4 h-4" /> }, 
@@ -23,7 +22,6 @@ export default async function PrismaPage() {
     .select('*')
     .eq('is_published', true);
 
-  // Filter purely for Prisma items
   const products = allProducts?.filter(p => 
     p.tags?.includes('Celebrations') || 
     p.tags?.includes('Planning') || 
@@ -32,7 +30,6 @@ export default async function PrismaPage() {
     p.tags?.includes('Bundles')
   ) || [];
 
-  // Group them by their first tag
   const groupedProducts = products.reduce((acc: any, product) => {
     let category = product.tags?.[0] || 'Other Designs';
     if (!acc[category]) acc[category] = [];
@@ -40,7 +37,6 @@ export default async function PrismaPage() {
     return acc;
   }, {});
 
-  // Ensure 'Bundles' is always at the bottom
   const sortedCategories = Object.entries(groupedProducts).sort(([a], [b]) => {
     if (a === 'Bundles') return 1;
     if (b === 'Bundles') return -1;
@@ -49,7 +45,6 @@ export default async function PrismaPage() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      {/* Editorial Hero Banner */}
       <div className="bg-[#f4f1ea] text-brand-charcoal rounded-3xl p-8 lg:p-12 mb-12 flex flex-col justify-center min-h-[250px]">
         <div className="flex items-center gap-3 mb-4 text-brand-charcoal/60">
           <PenTool className="w-6 h-6" />
@@ -64,15 +59,13 @@ export default async function PrismaPage() {
       <div className="flex flex-col md:flex-row gap-12 items-start">
         <FilterSidebar type="prisma" />
         
-        {/* Main Content Area */}
+        {/* Added w-full and min-w-0 to ensure proper flex behavior */}
         <div className="flex-1 space-y-12 w-full min-w-0">
           {sortedCategories.map(([category, items]: [string, any]) => {
             const style = sectionStyles[category] || sectionStyles['Default'];
             
             return (
               <section key={category} className={`${style.bg} p-6 lg:p-8 rounded-3xl relative`}>
-                
-                {/* Section Header */}
                 <div className="mb-6 pb-2 flex justify-between items-end">
                   <div className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full ${style.pillBg} ${style.pillText}`}>
                     {style.icon}
@@ -85,9 +78,7 @@ export default async function PrismaPage() {
                   </span>
                 </div>
                 
-                {/* Product Carousel */}
                 <ProductCarousel items={items} />
-
               </section>
             );
           })}
