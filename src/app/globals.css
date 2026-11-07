@@ -2,11 +2,64 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --brand-cream: #f8f6f0;
+  --brand-charcoal: #1a1a1a;
+  --brand-green: #112e25;
+  --brand-peach: #f4cfc3;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+/* THE FIX: Use clip instead of hidden to preserve sticky sidebar */
 html, body {
   max-width: 100vw;
-  overflow-x: hidden;
+  overflow-x: clip; 
   margin: 0;
   padding: 0;
+}
+
+body {
+  background: var(--brand-cream);
+  color: var(--brand-charcoal);
+  font-family: var(--font-inter), Arial, Helvetica, sans-serif;
+}
+
+.font-editorial {
+  font-family: var(--font-playfair), Georgia, serif;
+  font-weight: 400;
+  font-optical-sizing: auto;
+}
+
+::selection {
+  background: var(--brand-green);
+  color: var(--brand-cream);
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button, input, textarea, select {
+  font: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 /* Hide scrollbar for modern carousels */
@@ -16,4 +69,16 @@ html, body {
 .no-scrollbar {
   -ms-overflow-style: none;  
   scrollbar-width: none;  
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
