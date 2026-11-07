@@ -25,8 +25,13 @@ export default function FilterSidebar({ type = 'all' }: { type?: 'all' | 'stack'
   const activeCategories = categories[type] || categories.all;
 
   return (
-    // Sticky top-28 keeps it below the header. 
-    <aside className="w-full md:w-64 flex-shrink-0 sticky top-28 h-fit max-h-[calc(100vh-8rem)] overflow-y-auto no-scrollbar pb-8">
+    /* 
+      key fixes here: 
+      sticky top-24 (locks it 96px from top, right under the fixed 80px header)
+      max-h-[calc(100vh-7rem)] (prevents it from being taller than the screen)
+      overflow-y-auto (allows scrolling the sidebar independently if needed)
+    */
+    <aside className="w-full md:w-64 flex-shrink-0 md:sticky md:top-24 h-fit max-h-[calc(100vh-7rem)] overflow-y-auto no-scrollbar pb-8">
       <div className="space-y-8">
         <div>
           <h3 className="text-xs font-bold tracking-widest uppercase mb-4 text-brand-charcoal/50 flex justify-between items-center">
