@@ -1,11 +1,11 @@
 import FilterSidebar from "@/components/FilterSidebar";
 import ProductCarousel from "@/components/ProductCarousel";
-import { Heart, Compass, PenTool, Home, Package } from "lucide-react";
+import { Heart, Compass, PenTool, Home, Package, LayoutGrid } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 
 export const dynamic = 'force-dynamic';
 
-// Unique colors for each PRISMA section
+// Unique colors for each PRISMA section using the STACKPRISMA palette
 const sectionStyles: Record<string, { bg: string, pillBg: string, pillText: string, icon: React.ReactNode }> = {
   'Celebrations': { bg: 'bg-[#fdf4ed]', pillBg: 'bg-[#d4a373]', pillText: 'text-white', icon: <Heart className="w-4 h-4" /> }, 
   'Planning': { bg: 'bg-[#e8f0ea]', pillBg: 'bg-[#112e25]', pillText: 'text-[#e8f0ea]', icon: <Compass className="w-4 h-4" /> }, 
@@ -14,9 +14,6 @@ const sectionStyles: Record<string, { bg: string, pillBg: string, pillText: stri
   'Bundles': { bg: 'bg-brand-green', pillBg: 'bg-brand-cream', pillText: 'text-brand-green', icon: <Package className="w-4 h-4" /> },
   'Default': { bg: 'bg-brand-light', pillBg: 'bg-brand-charcoal', pillText: 'text-brand-cream', icon: <LayoutGrid className="w-4 h-4" /> }
 };
-
-// Fallback icon if needed
-import { LayoutGrid } from "lucide-react";
 
 export default async function PrismaPage() {
   const supabase = await createClient();
@@ -43,6 +40,13 @@ export default async function PrismaPage() {
     return acc;
   }, {});
 
+  // Ensure 'Bundles' is always at the bottom
+  const sortedCategories = Object.entries(groupedProducts).sort(([a], [b]) => {
+    if (a === 'Bundles') return 1;
+    if (b === 'Bundles') return -1;
+    return a.localeCompare(b);
+  });
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       {/* Editorial Hero Banner */}
@@ -60,18 +64,21 @@ export default async function PrismaPage() {
       <div className="flex flex-col md:flex-row gap-12 items-start">
         <FilterSidebar type="prisma" />
         
+        {/* Main Content Area */}
         <div className="flex-1 space-y-12 w-full min-w-0">
-          {Object.entries(groupedProducts).map(([category, items]: [string, any]) => {
+          {sortedCategories.map(([category, items]: [string, any]) => {
             const style = sectionStyles[category] || sectionStyles['Default'];
             
             return (
-              <section key={category} className={`${style.bg} p-6 lg:p-8 rounded-3xl relative overflow-hidden`}>
+              <section key={category} className={`${style.bg} p-6 lg:p-8 rounded-3xl relative`}>
                 
                 {/* Section Header */}
-                <div className="mb-6 pb-2 flex justify-between items-end relative z-10">
+                <div className="mb-6 pb-2 flex justify-between items-end">
                   <div className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full ${style.pillBg} ${style.pillText}`}>
                     {style.icon}
-                    <h2 className="text-sm font-bold tracking-wider uppercase">{category === 'Home' ? 'Home & Living' : category === 'Planning' ? 'Planning & Organization' : category}</h2>
+                    <h2 className="text-sm font-bold tracking-wider uppercase">
+                      {category === 'Home' ? 'Home & Living' : category === 'Planning' ? 'Planning & Organization' : category}
+                    </h2>
                   </div>
                   <span className="text-xs font-semibold text-brand-charcoal/40 uppercase tracking-wider hidden sm:block">
                     Swipe to explore
@@ -80,9 +87,6 @@ export default async function PrismaPage() {
                 
                 {/* Product Carousel */}
                 <ProductCarousel items={items} />
-
-                {/* Fade hint */}
-                <div className={`absolute top-0 right-0 w-16 h-full bg-gradient-to-l ${style.bg} to-transparent z-0 pointer-events-none opacity-50`}></div>
 
               </section>
             );
