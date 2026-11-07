@@ -25,6 +25,7 @@ export default function FilterSidebar({ type = 'all' }: { type?: 'all' | 'stack'
   const activeCategories = categories[type] || categories.all;
 
   return (
+    // Sticky top-28 keeps it below the header. 
     <aside className="w-full md:w-64 flex-shrink-0 sticky top-28 h-fit max-h-[calc(100vh-8rem)] overflow-y-auto no-scrollbar pb-8">
       <div className="space-y-8">
         <div>
