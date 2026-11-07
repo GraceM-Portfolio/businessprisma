@@ -56,10 +56,13 @@ export default async function PrismaPage() {
         </p>
       </div>
 
-      <div className="flex flex-col md:flex-row gap-12 items-start">
+      {/* 
+        items-start is CRITICAL here. 
+        It stops the sidebar from stretching to the full height of the product column.
+      */}
+      <div className="flex flex-col md:flex-row gap-12 items-start relative">
         <FilterSidebar type="prisma" />
         
-        {/* Added w-full and min-w-0 to ensure proper flex behavior */}
         <div className="flex-1 space-y-12 w-full min-w-0">
           {sortedCategories.map(([category, items]: [string, any]) => {
             const style = sectionStyles[category] || sectionStyles['Default'];
