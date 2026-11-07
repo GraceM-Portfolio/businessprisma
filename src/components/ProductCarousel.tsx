@@ -1,10 +1,28 @@
 "use client";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import ProductCard from "./ProductCard";
 
 export default function ProductCarousel({ items }: { items: any[] }) {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+
+  // Check scroll position to enable/disable arrows
+  const checkScroll = () => {
+    if (scrollRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+      setCanScrollLeft(scrollLeft > 0);
+      // Use a small threshold (1px) to account for rounding errors
+      setCanScrollRight(scrollLeft + clientWidth < scrollWidth - 1);
+    }
+  };
+
+  useEffect(() => {
+    checkScroll();
+    window.addEventListener("resize", checkScroll);
+    return () => window.removeEventListener("resize", checkScroll);
+  }, []);
 
   const scroll = (direction: 'left' | 'right') => {
     if (scrollRef.current) {
@@ -24,6 +42,9 @@ export default function ProductCarousel({ items }: { items: any[] }) {
         left: direction === 'left' ? -scrollAmount : scrollAmount, 
         behavior: 'smooth' 
       });
+
+      // Update arrow states after scroll animation
+      setTimeout(checkScroll, 500);
     }
   };
 
@@ -33,18 +54,26 @@ export default function ProductCarousel({ items }: { items: any[] }) {
       {/* Left Arrow */}
       <button 
         onClick={() => scroll('left')}
-        className="absolute left-0 top-[40%] -translate-y-1/2 -translate-x-4 z-20 w-10 h-10 bg-white border border-brand-charcoal/10 shadow-md rounded-full flex items-center justify-center text-brand-green hover:bg-brand-green hover:text-white transition-all hidden md:flex"
+        disabled={!canScrollLeft}
+        className={`absolute left-0 top-[40%] -translate-y-1/2 -translate-x-4 z-20 w-10 h-10 bg-white border border-brand-charcoal/10 shadow-md rounded-full flex items-center justify-center transition-all hidden md:flex ${
+          canScrollLeft ? "text-brand-green hover:bg-brand-green hover:text-white cursor-pointer" : "text-brand-charcoal/20 cursor-not-allowed opacity-50"
+        }`}
       >
         <ChevronLeft className="w-5 h-5" />
       </button>
 
-      {/* Scrollable Track */}
+      {/* 
+        THE FIX: Removed 'snap-x snap-mandatory'. 
+        This allows the scrollBy(3 cards) function to work perfectly without the browser fighting it.
+      */}
       <div 
         ref={scrollRef}
-        className="flex overflow-x-auto gap-6 snap-x snap-mandatory no-scrollbar pb-4 pt-2 scroll-smooth w-full px-1"
+        onScroll={checkScroll}
+        className="flex overflow-x-auto gap-6 no-scrollbar pb-4 pt-2 scroll-smooth w-full px-1"
       >
         {items.map((product: any) => (
-          <div key={product.id} className="snap-start shrink-0 w-[85vw] sm:w-[280px]">
+          // Removed 'snap-start'
+          <div key={product.id} className="shrink-0 w-[85vw] sm:w-[280px]">
             <ProductCard product={product} />
           </div>
         ))}
@@ -53,7 +82,10 @@ export default function ProductCarousel({ items }: { items: any[] }) {
       {/* Right Arrow */}
       <button 
         onClick={() => scroll('right')}
-        className="absolute right-0 top-[40%] -translate-y-1/2 translate-x-4 z-20 w-10 h-10 bg-white border border-brand-charcoal/10 shadow-md rounded-full flex items-center justify-center text-brand-green hover:bg-brand-green hover:text-white transition-all hidden md:flex"
+        disabled={!canScrollRight}
+        className={`absolute right-0 top-[40%] -translate-y-1/2 translate-x-4 z-20 w-10 h-10 bg-white border border-brand-charcoal/10 shadow-md rounded-full flex items-center justify-center transition-all hidden md:flex ${
+          canScrollRight ? "text-brand-green hover:bg-brand-green hover:text-white cursor-pointer" : "text-brand-charcoal/20 cursor-not-allowed opacity-50"
+        }`}
       >
         <ChevronRight className="w-5 h-5" />
       </button>
