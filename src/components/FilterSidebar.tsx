@@ -22,7 +22,7 @@ export default function FilterSidebar({
 
   return (
     <>
-      {/* MOBILE VIEW: Horizontal Scrollable Pills */}
+      {/* MOBILE VIEW */}
       <div className="md:hidden w-full overflow-x-auto no-scrollbar flex gap-2 mb-8 pb-2">
         {categories.map((cat) => (
           <button
@@ -30,8 +30,8 @@ export default function FilterSidebar({
             onClick={() => setActiveFilter(cat.name)}
             className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm whitespace-nowrap transition-colors border ${
               activeFilter === cat.name 
-                ? 'bg-white text-black border-white' 
-                : 'bg-transparent text-white/60 border-white/20 hover:border-white/50'
+                ? 'bg-brand-purple text-brand-cream border-brand-purple' 
+                : 'bg-transparent text-brand-charcoal/70 border-brand-charcoal/20 hover:border-brand-purple'
             }`}
           >
             {cat.icon} {cat.name === 'Planning' ? 'Planning & Org' : cat.name === 'Creative' ? 'Creative & Journaling' : cat.name === 'Home' ? 'Home & Living' : cat.name}
@@ -39,12 +39,12 @@ export default function FilterSidebar({
         ))}
       </div>
 
-      {/* DESKTOP VIEW: Sticky Sidebar */}
-      <aside className="hidden md:block w-64 flex-shrink-0 sticky top-24 h-fit max-h-[calc(100vh-7rem)] overflow-y-auto no-scrollbar pb-8 pr-4 border-r border-white/5">
+      {/* DESKTOP VIEW */}
+      <aside className="hidden md:block w-64 flex-shrink-0 sticky top-24 h-fit max-h-[calc(100vh-7rem)] overflow-y-auto no-scrollbar pb-8 pr-4 border-r border-brand-charcoal/10">
         <div className="space-y-8">
           <div>
-            <h3 className="text-xs font-bold tracking-widest uppercase mb-4 text-white/40 flex justify-between items-center">
-              Filter By
+            <h3 className="text-xs font-bold tracking-widest uppercase mb-4 text-brand-charcoal/50 flex justify-between items-center">
+              Shop by Category
             </h3>
             <ul className="space-y-1 text-sm font-medium">
               {categories.map((cat) => (
@@ -52,7 +52,7 @@ export default function FilterSidebar({
                   key={cat.name}
                   onClick={() => setActiveFilter(cat.name)}
                   className={`flex items-center justify-between p-2.5 rounded-lg cursor-pointer transition-colors ${
-                    activeFilter === cat.name ? 'text-white bg-white/10' : 'text-white/60 hover:text-white hover:bg-white/5'
+                    activeFilter === cat.name ? 'text-brand-purple bg-brand-purple/5 font-semibold' : 'text-brand-charcoal/70 hover:text-brand-charcoal hover:bg-brand-light/50'
                   }`}
                 >
                   <div className="flex items-center gap-3">
