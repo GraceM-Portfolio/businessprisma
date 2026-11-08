@@ -1,4 +1,3 @@
-// tailwind.config.ts
 import type { Config } from "tailwindcss";
 
 const config: Config = {
@@ -11,19 +10,11 @@ const config: Config = {
     extend: {
       colors: {
         brand: {
-          green: "#112e25",    
+          purple: "#2E1A38", // Replaced Forest Green
           cream: "#f8f6f0",    
           peach: "#f4cfc3",    
           charcoal: "#1a1a1a", 
           light: "#f0eee6",    
-        },
-        prisma: {
-          ivory: "#F8F6F1",
-          cream: "#EFEAE1",
-          espresso: "#332820",
-          taupe: "#A99B8B",
-          bronze: "#A17B56",
-          charcoal: "#242321",
         }
       },
       fontFamily: {
