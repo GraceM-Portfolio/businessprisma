@@ -10,9 +10,9 @@ const config: Config = {
     extend: {
       colors: {
         brand: {
-          purple: "#2E1A38", // Replaced Forest Green
-          cream: "#f8f6f0",    
-          peach: "#f4cfc3",    
+          green: "#112e25", // Original Forest Green
+          cream: "#f8f6f0", // Original Warm Cream
+          peach: "#f4cfc3", // Original Soft Peach
           charcoal: "#1a1a1a", 
           light: "#f0eee6",    
         }
