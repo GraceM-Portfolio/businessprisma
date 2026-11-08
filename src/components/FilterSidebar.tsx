@@ -30,8 +30,8 @@ export default function FilterSidebar({
             onClick={() => setActiveFilter(cat.name)}
             className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm whitespace-nowrap transition-colors border ${
               activeFilter === cat.name 
-                ? 'bg-brand-purple text-brand-cream border-brand-purple' 
-                : 'bg-transparent text-brand-charcoal/70 border-brand-charcoal/20 hover:border-brand-purple'
+                ? 'bg-brand-green text-brand-cream border-brand-green' 
+                : 'bg-transparent text-brand-charcoal/70 border-brand-charcoal/20 hover:border-brand-green'
             }`}
           >
             {cat.icon} {cat.name === 'Planning' ? 'Planning & Org' : cat.name === 'Creative' ? 'Creative & Journaling' : cat.name === 'Home' ? 'Home & Living' : cat.name}
@@ -52,7 +52,7 @@ export default function FilterSidebar({
                   key={cat.name}
                   onClick={() => setActiveFilter(cat.name)}
                   className={`flex items-center justify-between p-2.5 rounded-lg cursor-pointer transition-colors ${
-                    activeFilter === cat.name ? 'text-brand-purple bg-brand-purple/5 font-semibold' : 'text-brand-charcoal/70 hover:text-brand-charcoal hover:bg-brand-light/50'
+                    activeFilter === cat.name ? 'text-brand-green bg-brand-green/5 font-semibold' : 'text-brand-charcoal/70 hover:text-brand-charcoal hover:bg-brand-light/50'
                   }`}
                 >
                   <div className="flex items-center gap-3">
