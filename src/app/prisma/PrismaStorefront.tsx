@@ -16,13 +16,11 @@ const sectionStyles: Record<string, { bg: string, pillBg: string, pillText: stri
 export default function PrismaStorefront({ allProducts }: { allProducts: any[] }) {
   const [activeFilter, setActiveFilter] = useState("All");
 
-  // Filter products based on sidebar selection
   const filteredProducts = allProducts.filter(product => {
     if (activeFilter === "All") return true;
     return product.tags?.includes(activeFilter);
   });
 
-  // Group the filtered products into sections
   const groupedProducts = filteredProducts.reduce((acc: any, product) => {
     let category = product.tags?.[0] || 'Other Designs';
     if (!acc[category]) acc[category] = [];
@@ -30,7 +28,6 @@ export default function PrismaStorefront({ allProducts }: { allProducts: any[] }
     return acc;
   }, {});
 
-  // Sort so Bundles are at the bottom
   const sortedCategories = Object.entries(groupedProducts).sort(([a], [b]) => {
     if (a === 'Bundles') return 1;
     if (b === 'Bundles') return -1;
@@ -39,7 +36,6 @@ export default function PrismaStorefront({ allProducts }: { allProducts: any[] }
 
   return (
     <div className="flex flex-col md:flex-row gap-12 items-start relative mt-12">
-      {/* Pass the state to the sidebar */}
       <FilterSidebar 
         type="prisma" 
         activeFilter={activeFilter} 
@@ -48,7 +44,7 @@ export default function PrismaStorefront({ allProducts }: { allProducts: any[] }
       
       <div className="flex-1 space-y-12 w-full min-w-0">
         {sortedCategories.length === 0 ? (
-          <div className="text-center py-20 text-brand-charcoal/50">
+          <div className="text-center py-20 text-black font-medium">
             No products found for this category.
           </div>
         ) : (
@@ -64,7 +60,8 @@ export default function PrismaStorefront({ allProducts }: { allProducts: any[] }
                       {category === 'Home' ? 'Home & Living' : category === 'Planning' ? 'Planning & Organization' : category}
                     </h2>
                   </div>
-                  <span className="text-xs font-semibold text-brand-charcoal/40 uppercase tracking-wider hidden sm:block">
+                  {/* FIXED CONTRAST LABEL */}
+                  <span className="text-xs font-bold text-black uppercase tracking-wider hidden sm:block">
                     Swipe to explore
                   </span>
                 </div>
