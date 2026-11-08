@@ -17,11 +17,10 @@ export default function ProductCard({ product }: { product: any }) {
   };
 
   return (
-    // REMOVED bg-white and borders. The card is now fully transparent.
     <div className="group flex flex-col h-full transition-all duration-300">
       
       {/* IMAGE SECTION */}
-      <div className="relative w-full aspect-[4/3] bg-[#e8e4db] rounded-xl overflow-hidden mb-3">
+      <div className="relative w-full aspect-[4/3] bg-[#e8e4db] rounded-xl overflow-hidden mb-2.5">
         <Link href={`/product/${product.slug || product.id}`} className="block w-full h-full">
           {product.image_url ? (
             <Image 
@@ -38,9 +37,9 @@ export default function ProductCard({ product }: { product: any }) {
           )}
         </Link>
         
-        {/* Heart Icon */}
-        <button className={`absolute top-2 right-2 w-8 h-8 backdrop-blur-sm rounded-full flex items-center justify-center hover:scale-110 transition-all shadow-sm opacity-0 group-hover:opacity-100 ${isBundle ? 'bg-black/40 text-white hover:bg-black/60' : 'bg-white/90 text-brand-charcoal hover:bg-white'}`}>
-          <Heart className="w-4 h-4" />
+        {/* Heart Icon (Top Right) */}
+        <button className={`absolute top-2 right-2 w-7 h-7 backdrop-blur-sm rounded-full flex items-center justify-center hover:scale-110 transition-all shadow-sm opacity-0 group-hover:opacity-100 ${isBundle ? 'bg-black/40 text-white hover:bg-black/60' : 'bg-white/90 text-brand-charcoal hover:bg-white'}`}>
+          <Heart className="w-3.5 h-3.5" />
         </button>
 
         {/* Minimal Bundle Badge */}
@@ -51,27 +50,35 @@ export default function ProductCard({ product }: { product: any }) {
         )}
       </div>
       
-      {/* CONTENT SECTION - Colors adapt based on background */}
-      <div className="flex flex-col flex-grow px-1">
+      {/* CONTENT SECTION - Etsy Typography */}
+      <div className="flex flex-col flex-grow px-0.5">
         
+        {/* Title: 14px, Regular weight, tight leading, clamp 1 line */}
         <Link href={`/product/${product.slug || product.id}`} className="mb-1">
-          <h3 className={`font-sans font-medium text-[13px] leading-snug transition-colors line-clamp-1 ${isBundle ? 'text-white group-hover:text-[#f4cfc3]' : 'text-black group-hover:text-brand-green'}`}>
+          <h3 className={`font-sans font-normal text-[14px] leading-tight transition-colors line-clamp-1 ${
+            isBundle ? 'text-white group-hover:text-[#f4cfc3]' : 'text-[#222222] group-hover:text-black'
+          }`}>
             {product.title}
           </h3>
         </Link>
         
-        <div className={`text-[11px] mb-2 ${isBundle ? 'text-white/60' : 'text-gray-600'}`}>
-          {primaryFormat} • Instant Download
+        {/* Metadata: 11px, muted gray */}
+        <div className={`text-[11px] mb-1.5 ${isBundle ? 'text-white/60' : 'text-[#757575]'}`}>
+          {primaryFormat}
         </div>
         
-        <div className="flex items-center justify-between mt-auto pt-1">
-          <span className={`font-sans font-bold text-[15px] ${isBundle ? 'text-white' : 'text-black'}`}>
+        {/* Price & Quick Add */}
+        <div className="flex items-center justify-between mt-auto pt-0.5">
+          {/* Price: 16px, Bold */}
+          <span className={`font-sans font-bold text-[16px] ${isBundle ? 'text-white' : 'text-black'}`}>
             ${product.price}
           </span>
           
           <button 
             onClick={handleAddToCart}
-            className={`opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1 text-[11px] font-semibold hover:underline ${isBundle ? 'text-[#f4cfc3]' : 'text-black'}`}
+            className={`opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1 text-[11px] font-semibold hover:underline ${
+              isBundle ? 'text-[#f4cfc3]' : 'text-black'
+            }`}
           >
             <ShoppingBag className="w-3 h-3" /> Quick Add
           </button>
