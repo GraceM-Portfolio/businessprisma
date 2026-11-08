@@ -7,7 +7,7 @@ import {
   ArrowRight, Star
 } from "lucide-react";
 
-// Dark, moody, luxurious gradients inspired by the QUNDI mood board
+// Reverted to the Warm, Earthy Aesthetic
 const sectionStyles: Record<string, {
   bg: string,
   textColor: string,
@@ -15,61 +15,68 @@ const sectionStyles: Record<string, {
   icon: React.ReactNode,
   eyebrow: string,
   description: string,
-  decorativeIcon: React.ReactNode
+  decorativeIcon: React.ReactNode,
+  accentText: string
 }> = {
   'Celebrations': {
-    bg: 'bg-gradient-to-br from-[#1a1015] via-[#0a0a0a] to-[#0a0a0a]',
-    textColor: 'text-white',
-    mutedText: 'text-white/50',
-    icon: <Heart className="w-4 h-4 text-[#a36b8a]" />,
+    bg: 'bg-gradient-to-br from-[#fdf4ed] via-[#fbe8dd] to-[#f5d4c1]',
+    textColor: 'text-black',
+    mutedText: 'text-black/70',
+    icon: <Heart className="w-4 h-4" />,
     eyebrow: 'For the moments that matter',
     description: 'Beautifully designed wedding planners, invitations, and celebration kits for life\'s biggest days.',
-    decorativeIcon: <Heart className="w-64 h-64 text-white/[0.02]" />,
+    decorativeIcon: <Heart className="w-72 h-72 text-black/[0.03]" />,
+    accentText: 'text-[#a05a3c]',
   },
   'Planning': {
-    bg: 'bg-gradient-to-bl from-[#14181c] via-[#0a0a0a] to-[#0a0a0a]',
-    textColor: 'text-white',
-    mutedText: 'text-white/50',
-    icon: <Compass className="w-4 h-4 text-[#6b8a9e]" />,
+    bg: 'bg-gradient-to-br from-[#e8f0ea] via-[#dcebe0] to-[#c4dccb]',
+    textColor: 'text-black',
+    mutedText: 'text-black/70',
+    icon: <Compass className="w-4 h-4" />,
     eyebrow: 'Clarity for everyday life',
     description: 'Budget dashboards, household systems, and planners to bring structure and calm to your daily routine.',
-    decorativeIcon: <Compass className="w-64 h-64 text-white/[0.02]" />,
+    decorativeIcon: <Compass className="w-72 h-72 text-black/[0.03]" />,
+    accentText: 'text-[#112e25]',
   },
   'Creative': {
-    bg: 'bg-gradient-to-tr from-[#1a141c] via-[#0a0a0a] to-[#0a0a0a]',
-    textColor: 'text-white',
-    mutedText: 'text-white/50',
-    icon: <PenTool className="w-4 h-4 text-[#9e6b9b]" />,
+    bg: 'bg-gradient-to-br from-[#eff1f5] via-[#e6e2f0] to-[#dcd3eb]',
+    textColor: 'text-black',
+    mutedText: 'text-black/70',
+    icon: <PenTool className="w-4 h-4" />,
     eyebrow: 'Make space for creativity',
     description: 'Journals, digital stickers, and creative kits designed for reflection, memory-keeping, and self-expression.',
-    decorativeIcon: <PenTool className="w-64 h-64 text-white/[0.02]" />,
+    decorativeIcon: <PenTool className="w-72 h-72 text-black/[0.03]" />,
+    accentText: 'text-[#5a4a7a]',
   },
   'Home': {
-    bg: 'bg-gradient-to-br from-[#1c1614] via-[#0a0a0a] to-[#0a0a0a]',
-    textColor: 'text-white',
-    mutedText: 'text-white/50',
-    icon: <Home className="w-4 h-4 text-[#9e866b]" />,
+    bg: 'bg-gradient-to-br from-[#f7f1e8] via-[#f0e6d6] to-[#e2d0b8]',
+    textColor: 'text-black',
+    mutedText: 'text-black/70',
+    icon: <Home className="w-4 h-4" />,
     eyebrow: 'Make your space work beautifully',
     description: 'Room makeover guides, organization systems, and design resources for a home you truly love.',
-    decorativeIcon: <Home className="w-64 h-64 text-white/[0.02]" />,
+    decorativeIcon: <Home className="w-72 h-72 text-black/[0.03]" />,
+    accentText: 'text-[#8c6a4d]',
   },
   'Bundles': {
-    bg: 'bg-gradient-to-br from-[#2a1020] via-[#11050c] to-[#050505]',
+    bg: 'bg-gradient-to-br from-[#112e25] via-[#1a3b30] to-[#0d221b]',
     textColor: 'text-white',
-    mutedText: 'text-white/60',
-    icon: <Package className="w-4 h-4 text-white" />,
+    mutedText: 'text-white/70',
+    icon: <Package className="w-4 h-4" />,
     eyebrow: 'Complete collections. Better value.',
     description: 'Curated bundles that combine our best products so you get everything you need at a premium discount.',
-    decorativeIcon: <Package className="w-64 h-64 text-white/[0.03]" />,
+    decorativeIcon: <Package className="w-72 h-72 text-white/[0.04]" />,
+    accentText: 'text-[#f4cfc3]',
   },
   'Default': {
-    bg: 'bg-[#0a0a0a]',
-    textColor: 'text-white',
-    mutedText: 'text-white/50',
-    icon: <LayoutGrid className="w-4 h-4 text-white" />,
+    bg: 'bg-brand-light',
+    textColor: 'text-black',
+    mutedText: 'text-black/70',
+    icon: <LayoutGrid className="w-4 h-4" />,
     eyebrow: 'Explore',
     description: 'Discover our latest digital products.',
-    decorativeIcon: <LayoutGrid className="w-64 h-64 text-white/[0.02]" />,
+    decorativeIcon: <LayoutGrid className="w-72 h-72 text-black/[0.03]" />,
+    accentText: 'text-black',
   }
 };
 
@@ -96,6 +103,8 @@ export default function PrismaStorefront({ allProducts }: { allProducts: any[] }
 
   return (
     <div className="flex flex-col md:flex-row gap-8 lg:gap-12 items-start relative mt-6 md:mt-12 w-full max-w-full">
+      
+      {/* Sidebar (Mobile pill menu + Desktop sticky) */}
       <FilterSidebar 
         type="prisma" 
         activeFilter={activeFilter} 
@@ -115,42 +124,37 @@ export default function PrismaStorefront({ allProducts }: { allProducts: any[] }
             return (
               <section 
                 key={category} 
-                className={`${style.bg} rounded-3xl relative overflow-hidden shadow-2xl border border-white/5`}
+                className={`${style.bg} rounded-3xl relative overflow-hidden shadow-sm border border-black/5`}
               >
-                {/* Decorative Elements */}
-                <div className="absolute top-0 right-0 pointer-events-none overflow-hidden rounded-3xl">
+                <div className={`absolute -top-8 -right-8 ${isBundles ? 'text-white/[0.04]' : 'text-black/[0.03]'} pointer-events-none`}>
                   {style.decorativeIcon}
                 </div>
+                <div className={`absolute top-10 left-1/2 w-40 h-40 rounded-full blur-3xl ${isBundles ? 'bg-[#f4cfc3]/10' : 'bg-white/40'} pointer-events-none`}></div>
 
-                {/* Section Header */}
-                <div className="relative z-10 p-6 md:p-8">
-                  <div className="flex flex-col md:flex-row md:justify-between md:items-end gap-4 mb-4 md:mb-2">
+                <div className="relative z-10 p-6 lg:p-8">
+                  <div className="flex flex-col md:flex-row md:justify-between md:items-end gap-4 mb-2">
                     <div>
-                      {/* Eyebrow */}
-                      <div className={`flex items-center gap-2 mb-2 text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] ${style.mutedText}`}>
-                        <span className="w-4 md:w-6 h-[1px] bg-current"></span>
+                      <div className={`flex items-center gap-2 mb-3 text-xs font-bold uppercase tracking-[0.2em] ${isBundles ? 'text-[#f4cfc3]' : style.accentText}`}>
+                        <span className="w-6 h-[1px] bg-current"></span>
                         {style.eyebrow}
                       </div>
                       
-                      {/* Title */}
                       <div className="flex items-center gap-3 mb-2">
-                        <h2 className={`text-2xl md:text-3xl lg:text-4xl font-serif ${style.textColor}`}>
+                        <h2 className={`text-3xl lg:text-4xl font-serif ${style.textColor}`}>
                           {category === 'Home' ? 'Home & Living' : category === 'Planning' ? 'Planning & Organization' : category}
                         </h2>
                         {isBundles && (
-                          <span className="px-2 py-1 bg-white text-black text-[9px] font-bold uppercase tracking-widest rounded flex items-center gap-1">
+                          <span className="px-3 py-1 bg-[#f4cfc3] text-[#112e25] text-[10px] font-bold uppercase tracking-widest rounded-full flex items-center gap-1">
                             <Star className="w-3 h-3 fill-current" /> Best Value
                           </span>
                         )}
                       </div>
                       
-                      {/* Description */}
-                      <p className={`text-xs md:text-sm max-w-lg ${style.mutedText}`}>
+                      <p className={`text-sm max-w-lg ${style.mutedText}`}>
                         {style.description}
                       </p>
                     </div>
                     
-                    {/* Explore Link */}
                     <button className={`hidden md:flex group/link text-sm font-semibold items-center gap-2 shrink-0 ${style.textColor} hover:opacity-70 transition-colors`}>
                       Explore All
                       <ArrowRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
@@ -158,7 +162,6 @@ export default function PrismaStorefront({ allProducts }: { allProducts: any[] }
                   </div>
                 </div>
                 
-                {/* Product Carousel */}
                 <div className="relative z-10 px-2 pb-2 md:px-4 md:pb-4">
                   <ProductCarousel items={items} />
                 </div>
