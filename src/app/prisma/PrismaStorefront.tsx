@@ -14,48 +14,48 @@ const sectionStyles: Record<string, {
 }> = {
   'Celebrations': {
     bg: 'bg-[#fdf4ed]',
-    textColor: 'text-gray-900',
-    mutedText: 'text-gray-600',
+    textColor: 'text-brand-charcoal',
+    mutedText: 'text-brand-charcoal/70',
     icon: <Heart className="w-4 h-4" />,
     eyebrow: 'Celebrations',
     description: 'Make every occasion memorable.',
   },
   'Planning': {
     bg: 'bg-[#e8f0ea]',
-    textColor: 'text-gray-900',
-    mutedText: 'text-gray-600',
+    textColor: 'text-brand-charcoal',
+    mutedText: 'text-brand-charcoal/70',
     icon: <Compass className="w-4 h-4" />,
     eyebrow: 'Planning & Organization',
     description: 'Bring more clarity to everyday life.',
   },
   'Creative': {
     bg: 'bg-[#eff1f5]',
-    textColor: 'text-gray-900',
-    mutedText: 'text-gray-600',
+    textColor: 'text-brand-charcoal',
+    mutedText: 'text-brand-charcoal/70',
     icon: <PenTool className="w-4 h-4" />,
     eyebrow: 'Creative & Journaling',
     description: 'Make space for creativity.',
   },
   'Home': {
     bg: 'bg-[#f7f1e8]',
-    textColor: 'text-gray-900',
-    mutedText: 'text-gray-600',
+    textColor: 'text-brand-charcoal',
+    mutedText: 'text-brand-charcoal/70',
     icon: <Home className="w-4 h-4" />,
     eyebrow: 'Home & Living',
     description: 'Make your space work beautifully.',
   },
   'Bundles': {
-    bg: 'bg-[#112e25]',
-    textColor: 'text-white',
-    mutedText: 'text-white/70',
+    bg: 'bg-brand-purple',
+    textColor: 'text-brand-cream',
+    mutedText: 'text-brand-cream/70',
     icon: <Package className="w-4 h-4" />,
     eyebrow: 'Bundles',
     description: 'Complete collections. Better value.',
   },
   'Default': {
-    bg: 'bg-gray-50',
-    textColor: 'text-gray-900',
-    mutedText: 'text-gray-600',
+    bg: 'bg-brand-light',
+    textColor: 'text-brand-charcoal',
+    mutedText: 'text-brand-charcoal/70',
     icon: <LayoutGrid className="w-4 h-4" />,
     eyebrow: 'Shop',
     description: 'Discover our digital products.',
@@ -93,7 +93,7 @@ export default function PrismaStorefront({ allProducts }: { allProducts: any[] }
       
       <div className="flex-1 space-y-8 md:space-y-12 w-full min-w-0">
         {sortedCategories.length === 0 ? (
-          <div className="text-center py-20 text-white/50 font-medium">
+          <div className="text-center py-20 text-brand-charcoal/50 font-medium">
             No products found for this category.
           </div>
         ) : (
@@ -104,10 +104,9 @@ export default function PrismaStorefront({ allProducts }: { allProducts: any[] }
             return (
               <section 
                 key={category} 
-                className={`${style.bg} rounded-2xl p-6 md:p-8 border ${isBundles ? 'border-white/10' : 'border-black/5'}`}
+                className={`${style.bg} rounded-2xl p-6 md:p-8 border ${isBundles ? 'border-brand-purple/20' : 'border-brand-charcoal/5'}`}
               >
-                {/* Retail Section Header */}
-                <div className="flex flex-col md:flex-row md:justify-between md:items-end gap-2 mb-6 border-b ${isBundles ? 'border-white/10' : 'border-black/10'} pb-4">
+                <div className={`flex flex-col md:flex-row md:justify-between md:items-end gap-2 mb-6 border-b ${isBundles ? 'border-brand-cream/20' : 'border-brand-charcoal/10'} pb-4`}>
                   <div>
                     <h2 className={`text-2xl md:text-3xl font-serif mb-1 ${style.textColor}`}>
                       {style.eyebrow}
@@ -118,7 +117,6 @@ export default function PrismaStorefront({ allProducts }: { allProducts: any[] }
                   </div>
                 </div>
                 
-                {/* Product Carousel */}
                 <ProductCarousel items={items} />
               </section>
             );
