@@ -10,8 +10,7 @@ const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfa
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
-      {/* Changed bg-brand-cream to bg-[#050505] */}
-      <body className="bg-[#050505] text-white antialiased min-h-screen flex flex-col">
+      <body className="bg-brand-cream text-brand-charcoal antialiased min-h-screen flex flex-col">
         <CartProvider>
           <Header />
           <main className="flex-grow w-full pt-20">{children}</main>
