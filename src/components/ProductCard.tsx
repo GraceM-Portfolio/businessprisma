@@ -2,18 +2,22 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "./CartProvider";
-import { Plus } from "lucide-react";
+import { ShoppingBag } from "lucide-react";
 
 export default function ProductCard({ product }: { product: any }) {
   const { addToCart } = useCart();
   const formatLabel = product.format?.join(" • ") || "Digital Download";
-  const isBundle = product.tags?.includes('Bundles');
+
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.preventDefault(); // Prevents the link wrapping the card from triggering
+    addToCart(product);
+  };
 
   return (
-    <div className="group flex flex-col h-full bg-white rounded-2xl transition-all duration-500 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] overflow-hidden">
+    <div className="group flex flex-col h-full bg-white rounded-xl transition-all duration-300 hover:shadow-lg overflow-hidden border border-brand-charcoal/5">
       
-      {/* Tall Editorial Image */}
-      <div className="aspect-[4/5] relative overflow-hidden bg-[#f4f1ea] w-full">
+      {/* Rectangular Image (4:3) */}
+      <div className="aspect-[4/3] relative overflow-hidden bg-[#f4f1ea] w-full">
         <Link href={`/product/${product.slug || product.id}`}>
           {product.image_url ? (
             <Image 
@@ -28,46 +32,40 @@ export default function ProductCard({ product }: { product: any }) {
           )}
         </Link>
         
-        {/* Premium Pill Tag */}
         {product.tags && product.tags[0] && (
-          <div className="absolute top-4 left-4 px-3 py-1.5 bg-white/90 backdrop-blur-md text-[9px] font-bold tracking-[0.15em] uppercase text-brand-charcoal rounded-full shadow-sm">
+          <div className="absolute top-3 left-3 px-2.5 py-1 bg-white/90 backdrop-blur-md text-[9px] font-bold tracking-[0.15em] uppercase text-brand-charcoal rounded-full shadow-sm">
             {product.tags[0]}
           </div>
         )}
       </div>
       
-      {/* Content */}
-      <div className="p-6 flex flex-col flex-grow">
+      {/* Compact Content */}
+      <div className="p-4 flex flex-col flex-grow">
         
-        {/* Format */}
-        <div className="text-[10px] text-brand-charcoal/40 font-bold tracking-[0.15em] uppercase mb-2">
+        <div className="text-[9px] text-brand-charcoal/40 font-bold tracking-[0.15em] uppercase mb-1">
           {formatLabel}
         </div>
 
-        {/* Title */}
-        <Link href={`/product/${product.slug || product.id}`} className="mb-2">
-          <h3 className="font-serif text-lg leading-snug text-brand-charcoal group-hover:text-brand-green transition-colors line-clamp-2">
+        <Link href={`/product/${product.slug || product.id}`} className="mb-1">
+          <h3 className="font-serif text-base leading-snug text-brand-charcoal group-hover:text-brand-green transition-colors line-clamp-1">
             {product.title}
           </h3>
         </Link>
         
-        {/* Description */}
-        <p className="text-sm text-brand-charcoal/60 line-clamp-2 mb-6 flex-grow font-light">
+        <p className="text-xs text-brand-charcoal/60 line-clamp-2 mb-4 flex-grow font-light">
           {product.description}
         </p>
         
-        {/* Footer: Price & Add to Cart */}
-        <div className="flex items-center justify-between mt-auto pt-4 border-t border-brand-charcoal/5">
-          <span className="font-serif text-xl font-medium text-brand-charcoal">
+        <div className="flex items-center justify-between mt-auto pt-3 border-t border-brand-charcoal/5">
+          <span className="font-serif text-lg font-medium text-brand-charcoal">
             ${product.price}
           </span>
           
           <button 
-            onClick={() => addToCart(product)}
-            className="flex items-center justify-center w-10 h-10 rounded-full bg-brand-cream text-brand-charcoal hover:bg-brand-green hover:text-brand-cream transition-all duration-300"
-            aria-label="Add to cart"
+            onClick={handleAddToCart}
+            className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-brand-cream text-brand-charcoal text-xs font-medium hover:bg-brand-green hover:text-brand-cream transition-all duration-300"
           >
-            <Plus className="w-5 h-5" />
+            <ShoppingBag className="w-3.5 h-3.5" /> Add
           </button>
         </div>
       </div>
