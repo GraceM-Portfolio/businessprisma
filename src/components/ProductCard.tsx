@@ -17,10 +17,10 @@ export default function ProductCard({ product }: { product: any }) {
   };
 
   return (
-    <div className="group flex flex-col h-full bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden">
+    <div className="group flex flex-col h-full transition-all duration-300">
       
       {/* IMAGE SECTION */}
-      <div className="relative w-full aspect-[4/3] bg-[#f4f1ea] overflow-hidden">
+      <div className="relative w-full aspect-[4/3] bg-[#e8e4db] rounded-xl overflow-hidden mb-2.5">
         <Link href={`/product/${product.slug || product.id}`} className="block w-full h-full">
           {product.image_url ? (
             <Image 
@@ -31,17 +31,18 @@ export default function ProductCard({ product }: { product: any }) {
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
             />
           ) : (
-            <div className="absolute inset-0 flex items-center justify-center text-gray-400">
+            <div className="absolute inset-0 flex items-center justify-center text-black/20">
               No Image
             </div>
           )}
         </Link>
         
         {/* Heart Icon */}
-        <button className="absolute top-2 right-2 w-7 h-7 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center text-black hover:bg-white hover:scale-110 transition-all shadow-sm opacity-0 group-hover:opacity-100">
+        <button className={`absolute top-2 right-2 w-7 h-7 backdrop-blur-sm rounded-full flex items-center justify-center hover:scale-110 transition-all shadow-sm opacity-0 group-hover:opacity-100 ${isBundle ? 'bg-black/40 text-white hover:bg-black/60' : 'bg-white/90 text-black hover:bg-white'}`}>
           <Heart className="w-3.5 h-3.5" />
         </button>
 
+        {/* Minimal Bundle Badge */}
         {isBundle && (
           <div className="absolute top-2 left-2 px-2 py-0.5 bg-[#f4cfc3] text-[#112e25] text-[9px] font-bold tracking-widest uppercase rounded">
             Bundle
@@ -49,29 +50,33 @@ export default function ProductCard({ product }: { product: any }) {
         )}
       </div>
       
-      {/* CONTENT SECTION (White Card Retail Style) */}
-      <div className="p-4 flex flex-col flex-grow">
+      {/* CONTENT SECTION */}
+      <div className="flex flex-col flex-grow px-0.5">
         
         <Link href={`/product/${product.slug || product.id}`} className="mb-1">
-          <h3 className="font-sans font-normal text-[14px] leading-tight text-gray-900 group-hover:text-[#a86ca7] transition-colors line-clamp-1">
+          <h3 className={`font-sans font-normal text-[14px] leading-tight transition-colors line-clamp-1 ${
+            isBundle ? 'text-white group-hover:text-[#f4cfc3]' : 'text-[#222222] group-hover:text-black'
+          }`}>
             {product.title}
           </h3>
         </Link>
         
-        <div className="text-[11px] mb-3 text-gray-500">
+        <div className={`text-[11px] mb-1.5 ${isBundle ? 'text-white/60' : 'text-[#757575]'}`}>
           {primaryFormat}
         </div>
         
-        <div className="flex items-center justify-between mt-auto pt-2 border-t border-gray-100">
-          <span className="font-sans font-bold text-[16px] text-black">
+        <div className="flex items-center justify-between mt-auto pt-0.5">
+          <span className={`font-sans font-bold text-[16px] ${isBundle ? 'text-white' : 'text-black'}`}>
             ${product.price}
           </span>
           
           <button 
             onClick={handleAddToCart}
-            className="flex items-center gap-1.5 bg-[#f8f6f0] hover:bg-[#a86ca7] hover:text-white text-black px-3 py-1.5 rounded-md text-[11px] font-bold transition-colors"
+            className={`opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1 text-[11px] font-semibold hover:underline ${
+              isBundle ? 'text-[#f4cfc3]' : 'text-black'
+            }`}
           >
-            <ShoppingBag className="w-3.5 h-3.5" /> Add
+            <ShoppingBag className="w-3 h-3" /> Quick Add
           </button>
         </div>
 
