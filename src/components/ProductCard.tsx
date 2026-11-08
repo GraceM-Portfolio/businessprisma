@@ -2,72 +2,94 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "./CartProvider";
-import { ShoppingBag } from "lucide-react";
+import { ShoppingBag, Download } from "lucide-react";
 
 export default function ProductCard({ product }: { product: any }) {
   const { addToCart } = useCart();
+  
+  // Format label (e.g., "PDF, Canva")
   const formatLabel = product.format?.join(" • ") || "Digital Download";
+  const isBundle = product.tags?.includes('Bundles');
 
   const handleAddToCart = (e: React.MouseEvent) => {
-    e.preventDefault(); // Prevents the link wrapping the card from triggering
+    e.preventDefault(); // Stop navigation if clicked inside a Link
+    e.stopPropagation();
     addToCart(product);
   };
 
   return (
-    <div className="group flex flex-col h-full bg-white rounded-xl transition-all duration-300 hover:shadow-lg overflow-hidden border border-brand-charcoal/5">
+    <div className="group flex flex-col h-full bg-white rounded-lg border border-brand-charcoal/10 hover:border-brand-charcoal/20 transition-all duration-300 hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] overflow-hidden">
       
-      {/* Rectangular Image (4:3) */}
-      <div className="aspect-[4/3] relative overflow-hidden bg-[#f4f1ea] w-full">
-        <Link href={`/product/${product.slug || product.id}`}>
+      {/* --- IMAGE SECTION --- */}
+      <div className="relative w-full aspect-[4/3] bg-[#f4f1ea] overflow-hidden">
+        <Link href={`/product/${product.slug || product.id}`} className="block w-full h-full">
           {product.image_url ? (
             <Image 
               src={product.image_url} 
               alt={product.title} 
               fill 
-              className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+              className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
             />
           ) : (
-            <div className="absolute inset-0 flex items-center justify-center text-brand-charcoal/20">No Image</div>
+            <div className="absolute inset-0 flex items-center justify-center text-brand-charcoal/20">
+              No Image
+            </div>
           )}
         </Link>
         
+        {/* Category Pill (Creative Market Style) */}
         {product.tags && product.tags[0] && (
-          <div className="absolute top-3 left-3 px-2.5 py-1 bg-white/90 backdrop-blur-md text-[9px] font-bold tracking-[0.15em] uppercase text-brand-charcoal rounded-full shadow-sm">
+          <div className="absolute top-3 left-3 px-2.5 py-1 bg-white/95 backdrop-blur-sm text-[10px] font-bold tracking-widest uppercase text-brand-charcoal rounded shadow-sm pointer-events-none">
             {product.tags[0]}
+          </div>
+        )}
+
+        {/* Bundle Badge */}
+        {isBundle && (
+          <div className="absolute top-3 right-3 px-2.5 py-1 bg-brand-peach text-brand-charcoal text-[10px] font-bold tracking-widest uppercase rounded shadow-sm pointer-events-none">
+            Bundle
           </div>
         )}
       </div>
       
-      {/* Compact Content */}
+      {/* --- CONTENT SECTION --- */}
       <div className="p-4 flex flex-col flex-grow">
         
-        <div className="text-[9px] text-brand-charcoal/40 font-bold tracking-[0.15em] uppercase mb-1">
-          {formatLabel}
-        </div>
-
-        <Link href={`/product/${product.slug || product.id}`} className="mb-1">
-          <h3 className="font-serif text-base leading-snug text-brand-charcoal group-hover:text-brand-green transition-colors line-clamp-1">
-            {product.title}
-          </h3>
-        </Link>
-        
-        <p className="text-xs text-brand-charcoal/60 line-clamp-2 mb-4 flex-grow font-light">
-          {product.description}
-        </p>
-        
-        <div className="flex items-center justify-between mt-auto pt-3 border-t border-brand-charcoal/5">
+        {/* Title & Price Row */}
+        <div className="flex justify-between items-start gap-3 mb-1">
+          <Link href={`/product/${product.slug || product.id}`} className="flex-1">
+            <h3 className="font-sans font-semibold text-[15px] leading-tight text-brand-charcoal group-hover:text-brand-green transition-colors line-clamp-2">
+              {product.title}
+            </h3>
+          </Link>
           <span className="font-serif text-lg font-medium text-brand-charcoal">
             ${product.price}
           </span>
-          
+        </div>
+        
+        {/* Format & Instant Download Label */}
+        <div className="flex items-center gap-1.5 text-[11px] text-brand-charcoal/50 mb-3">
+          <Download className="w-3 h-3" />
+          <span className="uppercase tracking-wider font-medium">{formatLabel}</span>
+        </div>
+
+        {/* Short Description (Subtle) */}
+        <p className="text-xs text-brand-charcoal/60 line-clamp-2 mb-4 flex-grow font-light leading-relaxed">
+          {product.description}
+        </p>
+        
+        {/* Add to Cart Button (Etsy Style - Clear, Full Width) */}
+        <div className="mt-auto pt-2">
           <button 
             onClick={handleAddToCart}
-            className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-brand-cream text-brand-charcoal text-xs font-medium hover:bg-brand-green hover:text-brand-cream transition-all duration-300"
+            className="w-full flex items-center justify-center gap-2 py-2.5 rounded-md bg-brand-cream border border-brand-charcoal/10 text-brand-charcoal text-sm font-medium hover:bg-brand-green hover:text-brand-cream hover:border-brand-green transition-all duration-300"
           >
-            <ShoppingBag className="w-3.5 h-3.5" /> Add
+            <ShoppingBag className="w-4 h-4" /> 
+            Add to Cart
           </button>
         </div>
+
       </div>
     </div>
   );
