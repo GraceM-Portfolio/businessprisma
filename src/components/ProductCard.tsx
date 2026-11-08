@@ -20,32 +20,32 @@ export default function ProductCard({ product }: { product: any }) {
     <div className="group flex flex-col h-full transition-all duration-300">
       
       {/* IMAGE SECTION */}
-      <div className="relative w-full aspect-[4/3] bg-[#1a1a1a] rounded-xl overflow-hidden mb-3 border border-white/5">
+      <div className="relative w-full aspect-[4/3] bg-[#e8e4db] rounded-xl overflow-hidden mb-2.5">
         <Link href={`/product/${product.slug || product.id}`} className="block w-full h-full">
           {product.image_url ? (
             <Image 
               src={product.image_url} 
               alt={product.title} 
               fill 
-              className="object-cover transition-transform duration-700 ease-out group-hover:scale-105 opacity-90 group-hover:opacity-100"
+              className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
             />
           ) : (
-            <div className="absolute inset-0 flex items-center justify-center text-white/20">
+            <div className="absolute inset-0 flex items-center justify-center text-black/20">
               No Image
             </div>
           )}
         </Link>
         
         {/* Heart Icon */}
-        <button className="absolute top-2 right-2 w-8 h-8 bg-black/50 backdrop-blur-md rounded-full flex items-center justify-center text-white hover:bg-white hover:text-black transition-all shadow-sm opacity-0 group-hover:opacity-100">
-          <Heart className="w-4 h-4" />
+        <button className={`absolute top-2 right-2 w-7 h-7 backdrop-blur-sm rounded-full flex items-center justify-center hover:scale-110 transition-all shadow-sm opacity-0 group-hover:opacity-100 ${isBundle ? 'bg-black/40 text-white hover:bg-black/60' : 'bg-white/90 text-black hover:bg-white'}`}>
+          <Heart className="w-3.5 h-3.5" />
         </button>
 
         {/* Minimal Bundle Badge */}
         {isBundle && (
-          <div className="absolute top-2 left-2 px-2 py-0.5 bg-white text-black text-[9px] font-bold tracking-widest uppercase rounded">
-            Exclusive Bundle
+          <div className="absolute top-2 left-2 px-2 py-0.5 bg-[#f4cfc3] text-[#112e25] text-[9px] font-bold tracking-widest uppercase rounded">
+            Bundle
           </div>
         )}
       </div>
@@ -54,23 +54,27 @@ export default function ProductCard({ product }: { product: any }) {
       <div className="flex flex-col flex-grow px-0.5">
         
         <Link href={`/product/${product.slug || product.id}`} className="mb-1">
-          <h3 className="font-sans font-normal text-[14px] leading-tight text-white/90 group-hover:text-white transition-colors line-clamp-1">
+          <h3 className={`font-sans font-normal text-[14px] leading-tight transition-colors line-clamp-1 ${
+            isBundle ? 'text-white group-hover:text-[#f4cfc3]' : 'text-[#222222] group-hover:text-black'
+          }`}>
             {product.title}
           </h3>
         </Link>
         
-        <div className="text-[11px] mb-1.5 text-white/40">
+        <div className={`text-[11px] mb-1.5 ${isBundle ? 'text-white/60' : 'text-[#757575]'}`}>
           {primaryFormat}
         </div>
         
         <div className="flex items-center justify-between mt-auto pt-0.5">
-          <span className="font-sans font-bold text-[16px] text-white">
+          <span className={`font-sans font-bold text-[16px] ${isBundle ? 'text-white' : 'text-black'}`}>
             ${product.price}
           </span>
           
           <button 
             onClick={handleAddToCart}
-            className="opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1 text-[11px] font-semibold text-white/70 hover:text-white"
+            className={`opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1 text-[11px] font-semibold hover:underline ${
+              isBundle ? 'text-[#f4cfc3]' : 'text-black'
+            }`}
           >
             <ShoppingBag className="w-3 h-3" /> Quick Add
           </button>
