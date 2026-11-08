@@ -1,5 +1,5 @@
 "use client";
-import { ChevronDown, LayoutGrid, Heart, Compass, PenTool, Home, Package } from "lucide-react";
+import { LayoutGrid, Heart, Compass, PenTool, Home, Package } from "lucide-react";
 
 export default function FilterSidebar({ 
   type = 'all', 
@@ -11,79 +11,59 @@ export default function FilterSidebar({
   setActiveFilter?: (val: string) => void
 }) {
   
-  const categories = {
-    all: [
-      { name: "All Products", icon: <LayoutGrid className="w-4 h-4" /> },
-      { name: "Stack Products", icon: <LayoutGrid className="w-4 h-4" /> },
-      { name: "Prisma Products", icon: <PenTool className="w-4 h-4" /> },
-    ],
-    stack: [
-      { name: "Starter Kits", icon: <LayoutGrid className="w-4 h-4" /> },
-      { name: "UI Kits", icon: <LayoutGrid className="w-4 h-4" /> },
-      { name: "Component Packs", icon: <LayoutGrid className="w-4 h-4" /> },
-    ],
-    prisma: [
-      { name: "Celebrations", icon: <Heart className="w-4 h-4" /> },
-      { name: "Planning", icon: <Compass className="w-4 h-4" /> },
-      { name: "Creative", icon: <PenTool className="w-4 h-4" /> },
-      { name: "Home", icon: <Home className="w-4 h-4" /> },
-      { name: "Bundles", icon: <Package className="w-4 h-4" /> },
-    ]
-  };
-
-  const activeCategories = categories[type] || categories.all;
+  const categories = [
+    { name: "All", icon: <LayoutGrid className="w-4 h-4" /> },
+    { name: "Celebrations", icon: <Heart className="w-4 h-4" /> },
+    { name: "Planning", icon: <Compass className="w-4 h-4" /> },
+    { name: "Creative", icon: <PenTool className="w-4 h-4" /> },
+    { name: "Home", icon: <Home className="w-4 h-4" /> },
+    { name: "Bundles", icon: <Package className="w-4 h-4" /> },
+  ];
 
   return (
-    <aside className="w-full md:w-64 flex-shrink-0 md:sticky md:top-24 h-fit max-h-[calc(100vh-7rem)] overflow-y-auto no-scrollbar pb-8">
-      <div className="space-y-8">
-        <div>
-          {/* FIXED CONTRAST HEADER */}
-          <h3 className="text-xs font-bold tracking-widest uppercase mb-4 text-black flex justify-between items-center">
-            Shop by Category <ChevronDown className="w-4 h-4" />
-          </h3>
-          <ul className="space-y-1 text-sm font-medium">
-            
-            <li 
-              onClick={() => setActiveFilter('All')}
-              className={`flex items-center justify-between p-2.5 rounded-lg cursor-pointer transition-colors ${
-                activeFilter === 'All' ? 'text-brand-green bg-brand-light/70 font-bold' : 'text-brand-charcoal hover:bg-brand-light/30'
-              }`}
-            >
-              <div className="flex items-center gap-2"><LayoutGrid className="w-4 h-4" /> All Products</div>
-            </li>
+    <>
+      {/* MOBILE VIEW: Horizontal Scrollable Pills */}
+      <div className="md:hidden w-full overflow-x-auto no-scrollbar flex gap-2 mb-8 pb-2">
+        {categories.map((cat) => (
+          <button
+            key={cat.name}
+            onClick={() => setActiveFilter(cat.name)}
+            className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm whitespace-nowrap transition-colors border ${
+              activeFilter === cat.name 
+                ? 'bg-white text-black border-white' 
+                : 'bg-transparent text-white/60 border-white/20 hover:border-white/50'
+            }`}
+          >
+            {cat.icon} {cat.name === 'Planning' ? 'Planning & Org' : cat.name === 'Creative' ? 'Creative & Journaling' : cat.name === 'Home' ? 'Home & Living' : cat.name}
+          </button>
+        ))}
+      </div>
 
-            {activeCategories.map((cat, i) => {
-              if (cat.name === 'All Products') return null; 
-              
-              return (
+      {/* DESKTOP VIEW: Sticky Sidebar */}
+      <aside className="hidden md:block w-64 flex-shrink-0 sticky top-24 h-fit max-h-[calc(100vh-7rem)] overflow-y-auto no-scrollbar pb-8 pr-4 border-r border-white/5">
+        <div className="space-y-8">
+          <div>
+            <h3 className="text-xs font-bold tracking-widest uppercase mb-4 text-white/40 flex justify-between items-center">
+              Filter By
+            </h3>
+            <ul className="space-y-1 text-sm font-medium">
+              {categories.map((cat) => (
                 <li 
-                  key={i} 
+                  key={cat.name}
                   onClick={() => setActiveFilter(cat.name)}
                   className={`flex items-center justify-between p-2.5 rounded-lg cursor-pointer transition-colors ${
-                    activeFilter === cat.name ? 'text-brand-green bg-brand-light/70 font-bold' : 'text-brand-charcoal hover:bg-brand-light/30'
+                    activeFilter === cat.name ? 'text-white bg-white/10' : 'text-white/60 hover:text-white hover:bg-white/5'
                   }`}
                 >
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-3">
                     {cat.icon} {cat.name === 'Planning' ? 'Planning & Org' : cat.name === 'Creative' ? 'Creative & Journaling' : cat.name === 'Home' ? 'Home & Living' : cat.name}
                   </div>
                 </li>
-              );
-            })}
-          </ul>
+              ))}
+            </ul>
+          </div>
         </div>
-
-        <div>
-          <h3 className="text-xs font-bold tracking-widest uppercase mb-4 text-black flex justify-between items-center">
-            Filter by Price <ChevronDown className="w-4 h-4" />
-          </h3>
-          <ul className="space-y-3 text-sm text-brand-charcoal">
-            <li className="flex items-center gap-3"><input type="checkbox" className="rounded border-brand-charcoal/30 text-brand-green focus:ring-brand-green w-4 h-4" /> Under $15</li>
-            <li className="flex items-center gap-3"><input type="checkbox" className="rounded border-brand-charcoal/30 text-brand-green focus:ring-brand-green w-4 h-4" /> $15 - $30</li>
-            <li className="flex items-center gap-3"><input type="checkbox" className="rounded border-brand-charcoal/30 text-brand-green focus:ring-brand-green w-4 h-4" /> $30 - $50</li>
-            <li className="flex items-center gap-3"><input type="checkbox" className="rounded border-brand-charcoal/30 text-brand-green focus:ring-brand-green w-4 h-4" /> $50+</li>
-          </ul>
-        </div>
-      </div>
-    </aside>
+      </aside>
+    </>
   );
 }
