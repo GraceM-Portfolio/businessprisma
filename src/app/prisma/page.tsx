@@ -22,18 +22,17 @@ export default async function PrismaPage() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <div className="bg-[#f4f1ea] text-brand-charcoal rounded-3xl p-8 lg:p-12 mb-4 flex flex-col justify-center min-h-[250px]">
-        <div className="flex items-center gap-3 mb-4 text-brand-charcoal/60">
+      <div className="bg-[#f4f1ea] text-black rounded-3xl p-8 lg:p-12 mb-4 flex flex-col justify-center min-h-[250px]">
+        <div className="flex items-center gap-3 mb-4 text-black font-semibold">
           <PenTool className="w-6 h-6" />
-          <span className="font-semibold tracking-wider text-sm uppercase">The Prisma Collection</span>
+          <span className="font-bold tracking-wider text-sm uppercase">The Prisma Collection</span>
         </div>
-        <h1 className="text-4xl lg:text-5xl mb-4 font-serif max-w-2xl">Thoughtful products for everyday living.</h1>
-        <p className="text-brand-charcoal/70 max-w-lg">
+        <h1 className="text-4xl lg:text-5xl mb-4 font-serif max-w-2xl text-black">Thoughtful products for everyday living.</h1>
+        <p className="text-black font-medium max-w-lg">
           Discover practical tools, creative collections and beautifully designed digital products for the things that matter.
         </p>
       </div>
 
-      {/* Render the Client Component */}
       <PrismaStorefront allProducts={prismaProducts} />
     </div>
   );
