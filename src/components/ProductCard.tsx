@@ -2,11 +2,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "./CartProvider";
-import { ShoppingBag, Download } from "lucide-react";
+import { Heart, ShoppingBag } from "lucide-react";
 
 export default function ProductCard({ product }: { product: any }) {
   const { addToCart } = useCart();
-  const formatLabel = product.format?.join(" • ") || "Digital Download";
+  
+  // Get just the first format for a cleaner look
+  const primaryFormat = product.format?.[0] || "Digital Download";
   const isBundle = product.tags?.includes('Bundles');
 
   const handleAddToCart = (e: React.MouseEvent) => {
@@ -16,10 +18,10 @@ export default function ProductCard({ product }: { product: any }) {
   };
 
   return (
-    <div className="group flex flex-col h-full bg-white rounded-lg border border-brand-charcoal/10 hover:border-brand-charcoal/20 transition-all duration-300 hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] overflow-hidden">
+    <div className="group flex flex-col h-full bg-white transition-all duration-300">
       
       {/* IMAGE SECTION */}
-      <div className="relative w-full aspect-[4/3] bg-[#f4f1ea] overflow-hidden">
+      <div className="relative w-full aspect-[4/3] bg-[#f4f1ea] rounded-xl overflow-hidden mb-3">
         <Link href={`/product/${product.slug || product.id}`} className="block w-full h-full">
           {product.image_url ? (
             <Image 
@@ -36,55 +38,46 @@ export default function ProductCard({ product }: { product: any }) {
           )}
         </Link>
         
-        {/* Category Pill */}
-        {product.tags && product.tags[0] && (
-          <div className="absolute top-3 left-3 px-2.5 py-1 bg-white/95 backdrop-blur-sm text-[10px] font-bold tracking-widest uppercase text-brand-charcoal rounded shadow-sm pointer-events-none">
-            {product.tags[0]}
-          </div>
-        )}
+        {/* Etsy-style Favorite Heart (Top Right) */}
+        <button className="absolute top-2 right-2 w-8 h-8 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center text-brand-charcoal hover:bg-white hover:scale-110 transition-all shadow-sm opacity-0 group-hover:opacity-100">
+          <Heart className="w-4 h-4" />
+        </button>
 
-        {/* Bundle Badge */}
+        {/* Minimal Bundle Badge */}
         {isBundle && (
-          <div className="absolute top-3 right-3 px-2.5 py-1 bg-brand-peach text-brand-charcoal text-[10px] font-bold tracking-widest uppercase rounded shadow-sm pointer-events-none">
+          <div className="absolute top-2 left-2 px-2 py-0.5 bg-brand-green text-white text-[9px] font-bold tracking-widest uppercase rounded">
             Bundle
           </div>
         )}
       </div>
       
-      {/* CONTENT SECTION */}
-      <div className="p-4 flex flex-col flex-grow">
+      {/* CONTENT SECTION - Super Minimal */}
+      <div className="flex flex-col flex-grow px-1">
         
-        {/* Title & Price Row */}
-        <div className="flex justify-between items-start gap-3 mb-1">
-          <Link href={`/product/${product.slug || product.id}`} className="flex-1">
-            <h3 className="font-sans font-semibold text-[15px] leading-tight text-black group-hover:text-brand-green transition-colors line-clamp-2">
-              {product.title}
-            </h3>
-          </Link>
-          <span className="font-serif text-lg font-medium text-black">
+        {/* Title (Line clamped to 1 line for Etsy feel) */}
+        <Link href={`/product/${product.slug || product.id}`} className="mb-1">
+          <h3 className="font-sans font-medium text-[13px] leading-snug text-black group-hover:text-brand-green transition-colors line-clamp-1">
+            {product.title}
+          </h3>
+        </Link>
+        
+        {/* Format (Tiny and Subtle) */}
+        <div className="text-[11px] text-gray-500 mb-2">
+          {primaryFormat} • Instant Download
+        </div>
+        
+        {/* Price & Quick Add Row */}
+        <div className="flex items-center justify-between mt-auto pt-1">
+          <span className="font-sans font-bold text-[15px] text-black">
             ${product.price}
           </span>
-        </div>
-        
-        {/* Format & Instant Download Label - FIXED CONTRAST */}
-        <div className="flex items-center gap-1.5 text-[11px] text-brand-charcoal mb-3">
-          <Download className="w-3 h-3" />
-          <span className="uppercase tracking-wider font-semibold">{formatLabel}</span>
-        </div>
-
-        {/* Short Description - FIXED CONTRAST */}
-        <p className="text-xs text-brand-charcoal line-clamp-2 mb-4 flex-grow font-normal leading-relaxed">
-          {product.description}
-        </p>
-        
-        {/* Add to Cart Button */}
-        <div className="mt-auto pt-2">
+          
+          {/* Minimal Quick Add Button (Appears on hover) */}
           <button 
             onClick={handleAddToCart}
-            className="w-full flex items-center justify-center gap-2 py-2.5 rounded-md bg-brand-cream border border-brand-charcoal/20 text-brand-charcoal text-sm font-semibold hover:bg-brand-green hover:text-brand-cream hover:border-brand-green transition-all duration-300"
+            className="opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1 text-[11px] font-semibold text-brand-green hover:underline"
           >
-            <ShoppingBag className="w-4 h-4" /> 
-            Add to Cart
+            <ShoppingBag className="w-3 h-3" /> Quick Add
           </button>
         </div>
 
