@@ -37,24 +37,22 @@ export default function FilterSidebar({
     <aside className="w-full md:w-64 flex-shrink-0 md:sticky md:top-24 h-fit max-h-[calc(100vh-7rem)] overflow-y-auto no-scrollbar pb-8">
       <div className="space-y-8">
         <div>
-          <h3 className="text-xs font-bold tracking-widest uppercase mb-4 text-brand-charcoal/50 flex justify-between items-center">
+          {/* FIXED CONTRAST HEADER */}
+          <h3 className="text-xs font-bold tracking-widest uppercase mb-4 text-black flex justify-between items-center">
             Shop by Category <ChevronDown className="w-4 h-4" />
           </h3>
           <ul className="space-y-1 text-sm font-medium">
             
-            {/* "All" Button */}
             <li 
               onClick={() => setActiveFilter('All')}
               className={`flex items-center justify-between p-2.5 rounded-lg cursor-pointer transition-colors ${
-                activeFilter === 'All' ? 'text-brand-green bg-brand-light/70' : 'text-brand-charcoal/70 hover:bg-brand-light/30'
+                activeFilter === 'All' ? 'text-brand-green bg-brand-light/70 font-bold' : 'text-brand-charcoal hover:bg-brand-light/30'
               }`}
             >
               <div className="flex items-center gap-2"><LayoutGrid className="w-4 h-4" /> All Products</div>
             </li>
 
-            {/* Category Buttons */}
             {activeCategories.map((cat, i) => {
-              // Skip "All Products" if we already rendered it above
               if (cat.name === 'All Products') return null; 
               
               return (
@@ -62,7 +60,7 @@ export default function FilterSidebar({
                   key={i} 
                   onClick={() => setActiveFilter(cat.name)}
                   className={`flex items-center justify-between p-2.5 rounded-lg cursor-pointer transition-colors ${
-                    activeFilter === cat.name ? 'text-brand-green bg-brand-light/70' : 'text-brand-charcoal/70 hover:bg-brand-light/30'
+                    activeFilter === cat.name ? 'text-brand-green bg-brand-light/70 font-bold' : 'text-brand-charcoal hover:bg-brand-light/30'
                   }`}
                 >
                   <div className="flex items-center gap-2">
@@ -74,15 +72,15 @@ export default function FilterSidebar({
           </ul>
         </div>
 
-        {/* Static filters for now (UI only) */}
         <div>
-          <h3 className="text-xs font-bold tracking-widest uppercase mb-4 text-brand-charcoal/50 flex justify-between items-center">
+          <h3 className="text-xs font-bold tracking-widest uppercase mb-4 text-black flex justify-between items-center">
             Filter by Price <ChevronDown className="w-4 h-4" />
           </h3>
-          <ul className="space-y-3 text-sm text-brand-charcoal/70">
-            <li className="flex items-center gap-3 cursor-not-allowed opacity-50"><input type="checkbox" disabled className="rounded border-brand-charcoal/20 w-4 h-4" /> Under $15</li>
-            <li className="flex items-center gap-3 cursor-not-allowed opacity-50"><input type="checkbox" disabled className="rounded border-brand-charcoal/20 w-4 h-4" /> $15 - $30</li>
-            <li className="flex items-center gap-3 cursor-not-allowed opacity-50"><input type="checkbox" disabled className="rounded border-brand-charcoal/20 w-4 h-4" /> $30 - $50</li>
+          <ul className="space-y-3 text-sm text-brand-charcoal">
+            <li className="flex items-center gap-3"><input type="checkbox" className="rounded border-brand-charcoal/30 text-brand-green focus:ring-brand-green w-4 h-4" /> Under $15</li>
+            <li className="flex items-center gap-3"><input type="checkbox" className="rounded border-brand-charcoal/30 text-brand-green focus:ring-brand-green w-4 h-4" /> $15 - $30</li>
+            <li className="flex items-center gap-3"><input type="checkbox" className="rounded border-brand-charcoal/30 text-brand-green focus:ring-brand-green w-4 h-4" /> $30 - $50</li>
+            <li className="flex items-center gap-3"><input type="checkbox" className="rounded border-brand-charcoal/30 text-brand-green focus:ring-brand-green w-4 h-4" /> $50+</li>
           </ul>
         </div>
       </div>
