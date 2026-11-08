@@ -21,30 +21,22 @@ export default async function PrismaPage() {
   ) || [];
 
   return (
-    // Dark page wrapper
-    <div className="bg-[#050505] min-h-screen text-white pb-20">
+    <div className="bg-brand-cream min-h-screen text-brand-charcoal pb-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 md:pt-12">
         
-        {/* QUNDI-inspired Dark Hero */}
-        <div className="bg-gradient-to-br from-[#1a1015] via-[#0a0a0a] to-[#050505] border border-white/5 rounded-3xl p-8 lg:p-16 mb-8 relative overflow-hidden shadow-2xl">
-          {/* Subtle plum glow */}
-          <div className="absolute top-0 right-0 w-96 h-96 bg-[#4a2040] rounded-full blur-[120px] opacity-30 pointer-events-none"></div>
-
-          <div className="relative z-10">
-            <div className="flex items-center gap-3 mb-6 text-white/50">
-              <PenTool className="w-5 h-5" />
-              <span className="font-bold tracking-[0.2em] text-[10px] md:text-xs uppercase">The Prisma Collection</span>
-            </div>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl mb-6 font-serif max-w-3xl leading-[1.1] text-white">
-              Thoughtful products for <br className="hidden md:block"/><span className="italic text-white/70">everyday living.</span>
-            </h1>
-            <p className="text-white/50 font-medium max-w-lg text-sm md:text-base leading-relaxed">
-              Discover practical tools, creative collections and beautifully designed digital products for the things that matter.
-            </p>
+        <div className="bg-[#f4f1ea] text-brand-charcoal rounded-3xl p-8 lg:p-16 mb-8 border border-brand-charcoal/5 shadow-sm">
+          <div className="flex items-center gap-3 mb-6 text-brand-charcoal/60">
+            <PenTool className="w-5 h-5" />
+            <span className="font-bold tracking-[0.2em] text-[10px] md:text-xs uppercase">The Prisma Collection</span>
           </div>
+          <h1 className="text-4xl md:text-6xl lg:text-7xl mb-6 font-serif max-w-3xl leading-[1.1] text-brand-charcoal">
+            Thoughtful products for <br className="hidden md:block"/><span className="italic text-brand-charcoal/70">everyday living.</span>
+          </h1>
+          <p className="text-brand-charcoal/60 font-medium max-w-lg text-sm md:text-base leading-relaxed">
+            Discover practical tools, creative collections and beautifully designed digital products for the things that matter.
+          </p>
         </div>
 
-        {/* The storefront retains its warm, colorful sections */}
         <PrismaStorefront allProducts={prismaProducts} />
       </div>
     </div>
