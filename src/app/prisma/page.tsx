@@ -56,20 +56,17 @@ export default async function PrismaPage() {
         </p>
       </div>
 
-      {/* 
-        items-start is CRITICAL here. 
-        It stops the sidebar from stretching to the full height of the product column.
-      */}
       <div className="flex flex-col md:flex-row gap-12 items-start relative">
         <FilterSidebar type="prisma" />
         
+        {/* Added min-w-0 to ensure the flex child doesn't overflow the parent */}
         <div className="flex-1 space-y-12 w-full min-w-0">
           {sortedCategories.map(([category, items]: [string, any]) => {
             const style = sectionStyles[category] || sectionStyles['Default'];
             
             return (
               <section key={category} className={`${style.bg} p-6 lg:p-8 rounded-3xl relative`}>
-                <div className="mb-6 pb-2 flex justify-between items-end">
+                <div className="mb-2 flex justify-between items-end">
                   <div className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full ${style.pillBg} ${style.pillText}`}>
                     {style.icon}
                     <h2 className="text-sm font-bold tracking-wider uppercase">
