@@ -17,10 +17,12 @@ export default function ProductCard({ product }: { product: any }) {
   };
 
   return (
-    // Transparent background (no bg-white)
-    <div className="group flex flex-col h-full transition-all duration-300">
+    // Removed white background and heavy borders. Transparent by default.
+    <div className={`group flex flex-col h-full transition-all duration-300 ${
+      isBundle ? 'bg-white/5 border border-white/10 rounded-xl p-3' : ''
+    }`}>
       
-      <div className="relative w-full aspect-[4/3] bg-[#e8e4db] rounded-xl overflow-hidden mb-2.5">
+      <div className="relative w-full aspect-[4/3] bg-[#e8e4db] rounded-xl overflow-hidden mb-3">
         <Link href={`/product/${product.slug || product.id}`} className="block w-full h-full">
           {product.image_url ? (
             <Image 
@@ -42,38 +44,38 @@ export default function ProductCard({ product }: { product: any }) {
         </button>
 
         {isBundle && (
-          <div className="absolute top-2 left-2 px-2 py-0.5 bg-[#f4cfc3] text-[#112e25] text-[9px] font-bold tracking-widest uppercase rounded">
+          <div className="absolute top-2 left-2 px-2 py-0.5 bg-brand-peach text-[#112e25] text-[9px] font-bold tracking-widest uppercase rounded">
             Bundle
           </div>
         )}
       </div>
       
-      <div className="flex flex-col flex-grow px-0.5">
+      <div className="flex flex-col flex-grow px-1">
         
         <Link href={`/product/${product.slug || product.id}`} className="mb-1">
-          <h3 className={`font-sans font-normal text-[14px] leading-tight transition-colors line-clamp-1 ${
+          <h3 className={`font-sans font-semibold text-[14px] leading-tight transition-colors line-clamp-1 ${
             isBundle ? 'text-white group-hover:text-[#f4cfc3]' : 'text-[#222222] group-hover:text-black'
           }`}>
             {product.title}
           </h3>
         </Link>
         
-        <div className={`text-[11px] mb-1.5 ${isBundle ? 'text-white/60' : 'text-[#757575]'}`}>
+        <div className={`text-[11px] mb-2 ${isBundle ? 'text-white/60' : 'text-[#757575]'}`}>
           {primaryFormat}
         </div>
         
-        <div className="flex items-center justify-between mt-auto pt-0.5">
+        <div className={`flex items-center justify-between mt-auto pt-2 ${isBundle ? 'border-t border-white/10' : 'border-t border-black/10'}`}>
           <span className={`font-sans font-bold text-[16px] ${isBundle ? 'text-white' : 'text-black'}`}>
             ${product.price}
           </span>
           
           <button 
             onClick={handleAddToCart}
-            className={`opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1 text-[11px] font-semibold hover:underline ${
+            className={`opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1 text-[11px] font-bold hover:underline ${
               isBundle ? 'text-[#f4cfc3]' : 'text-black'
             }`}
           >
-            <ShoppingBag className="w-3 h-3" /> Quick Add
+            <ShoppingBag className="w-3.5 h-3.5" /> Quick Add
           </button>
         </div>
 
