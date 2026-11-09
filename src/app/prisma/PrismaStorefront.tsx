@@ -13,7 +13,8 @@ const sectionStyles: Record<string, {
   description: string
 }> = {
   'Celebrations': {
-    bg: 'bg-gradient-to-br from-[#fdf4ed] via-[#fbe8dd] to-[#f5d4c1]',
+    // Frosted Peach/Glass
+    bg: 'bg-[#fdf4ed]/60 backdrop-blur-2xl border-white/60 shadow-[0_8px_32px_0_rgba(0,0,0,0.04)]',
     textColor: 'text-black',
     mutedText: 'text-black/70',
     icon: <Heart className="w-4 h-4" />,
@@ -21,7 +22,8 @@ const sectionStyles: Record<string, {
     description: 'Beautifully designed wedding planners, invitations, and celebration kits for life\'s biggest days.',
   },
   'Planning': {
-    bg: 'bg-gradient-to-br from-[#e8f0ea] via-[#dcebe0] to-[#c4dccb]',
+    // Frosted Sage/Glass
+    bg: 'bg-[#e8f0ea]/60 backdrop-blur-2xl border-white/60 shadow-[0_8px_32px_0_rgba(0,0,0,0.04)]',
     textColor: 'text-black',
     mutedText: 'text-black/70',
     icon: <Compass className="w-4 h-4" />,
@@ -29,7 +31,8 @@ const sectionStyles: Record<string, {
     description: 'Budget dashboards, household systems, and planners to bring structure and calm to your daily routine.',
   },
   'Creative': {
-    bg: 'bg-gradient-to-br from-[#eff1f5] via-[#e6e2f0] to-[#dcd3eb]',
+    // Frosted Lavender/Glass
+    bg: 'bg-[#eff1f5]/60 backdrop-blur-2xl border-white/60 shadow-[0_8px_32px_0_rgba(0,0,0,0.04)]',
     textColor: 'text-black',
     mutedText: 'text-black/70',
     icon: <PenTool className="w-4 h-4" />,
@@ -37,7 +40,8 @@ const sectionStyles: Record<string, {
     description: 'Journals, digital stickers, and creative kits designed for reflection, memory-keeping, and self-expression.',
   },
   'Home': {
-    bg: 'bg-gradient-to-br from-[#f7f1e8] via-[#f0e6d6] to-[#e2d0b8]',
+    // Frosted Sand/Glass
+    bg: 'bg-[#f7f1e8]/60 backdrop-blur-2xl border-white/60 shadow-[0_8px_32px_0_rgba(0,0,0,0.04)]',
     textColor: 'text-black',
     mutedText: 'text-black/70',
     icon: <Home className="w-4 h-4" />,
@@ -45,7 +49,8 @@ const sectionStyles: Record<string, {
     description: 'Room makeover guides, organization systems, and design resources for a home you truly love.',
   },
   'Bundles': {
-    bg: 'bg-gradient-to-br from-[#112e25] via-[#1a3b30] to-[#0d221b]',
+    // Frosted Dark Green/Glass
+    bg: 'bg-[#112e25]/90 backdrop-blur-2xl border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.15)]',
     textColor: 'text-white',
     mutedText: 'text-white/70',
     icon: <Package className="w-4 h-4" />,
@@ -53,7 +58,7 @@ const sectionStyles: Record<string, {
     description: 'Curated bundles that combine our best products so you get everything you need at a premium discount.',
   },
   'Default': {
-    bg: 'bg-brand-light',
+    bg: 'bg-white/60 backdrop-blur-2xl border-white/60',
     textColor: 'text-black',
     mutedText: 'text-black/70',
     icon: <LayoutGrid className="w-4 h-4" />,
@@ -84,48 +89,62 @@ export default function PrismaStorefront({ allProducts }: { allProducts: any[] }
   });
 
   return (
-    <div className="flex flex-col md:flex-row gap-8 lg:gap-12 items-start relative mt-6 md:mt-12 w-full max-w-full">
-      <FilterSidebar 
-        type="prisma" 
-        activeFilter={activeFilter} 
-        setActiveFilter={setActiveFilter} 
-      />
+    // Added relative wrapper for the background blobs
+    <div className="relative w-full max-w-full">
       
-      <div className="flex-1 space-y-8 md:space-y-12 w-full min-w-0">
-        {sortedCategories.length === 0 ? (
-          <div className="text-center py-20 text-brand-charcoal/50 font-medium">
-            No products found for this category.
-          </div>
-        ) : (
-          sortedCategories.map(([category, items]: [string, any]) => {
-            const style = sectionStyles[category] || sectionStyles['Default'];
-            const isBundles = category === 'Bundles';
-            
-            return (
-              <section 
-                key={category} 
-                className={`${style.bg} rounded-3xl p-6 md:p-8 border ${isBundles ? 'border-white/10' : 'border-black/5'} shadow-sm`}
-              >
-                <div className={`flex flex-col md:flex-row md:justify-between md:items-end gap-2 mb-6 border-b ${isBundles ? 'border-white/10' : 'border-black/10'} pb-4`}>
-                  <div>
-                    <div className={`flex items-center gap-2 mb-2 text-xs font-bold uppercase tracking-[0.2em] ${style.mutedText}`}>
-                      <span className="w-6 h-[1px] bg-current"></span>
-                      {style.eyebrow}
+      {/* 
+        BACKGROUND BLOBS 
+        These colorful blurred orbs sit behind the glass sections, 
+        allowing the 'backdrop-blur' to actually show its frosty effect.
+      */}
+      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-[#f4cfc3] rounded-full mix-blend-multiply filter blur-[100px] opacity-40 pointer-events-none z-0"></div>
+      <div className="absolute top-[20%] right-1/4 w-[400px] h-[400px] bg-[#e8f0ea] rounded-full mix-blend-multiply filter blur-[100px] opacity-50 pointer-events-none z-0"></div>
+      <div className="absolute bottom-[20%] left-1/3 w-[500px] h-[500px] bg-[#eff1f5] rounded-full mix-blend-multiply filter blur-[120px] opacity-50 pointer-events-none z-0"></div>
+
+      {/* Main Content (z-10 to sit above the blobs) */}
+      <div className="relative z-10 flex flex-col md:flex-row gap-8 lg:gap-12 items-start mt-6 md:mt-12 w-full max-w-full">
+        <FilterSidebar 
+          type="prisma" 
+          activeFilter={activeFilter} 
+          setActiveFilter={setActiveFilter} 
+        />
+        
+        <div className="flex-1 space-y-8 md:space-y-12 w-full min-w-0">
+          {sortedCategories.length === 0 ? (
+            <div className="text-center py-20 text-brand-charcoal/50 font-medium">
+              No products found for this category.
+            </div>
+          ) : (
+            sortedCategories.map(([category, items]: [string, any]) => {
+              const style = sectionStyles[category] || sectionStyles['Default'];
+              const isBundles = category === 'Bundles';
+              
+              return (
+                <section 
+                  key={category} 
+                  className={`${style.bg} rounded-3xl p-6 md:p-8 border`}
+                >
+                  <div className={`flex flex-col md:flex-row md:justify-between md:items-end gap-2 mb-6 border-b ${isBundles ? 'border-white/10' : 'border-black/10'} pb-4`}>
+                    <div>
+                      <div className={`flex items-center gap-2 mb-2 text-xs font-bold uppercase tracking-[0.2em] ${style.mutedText}`}>
+                        <span className="w-6 h-[1px] bg-current"></span>
+                        {style.eyebrow}
+                      </div>
+                      <h2 className={`text-2xl md:text-3xl font-serif mb-1 ${style.textColor}`}>
+                        {category === 'Home' ? 'Home & Living' : category === 'Planning' ? 'Planning & Organization' : category}
+                      </h2>
+                      <p className={`text-sm ${style.mutedText}`}>
+                        {style.description}
+                      </p>
                     </div>
-                    <h2 className={`text-2xl md:text-3xl font-serif mb-1 ${style.textColor}`}>
-                      {category === 'Home' ? 'Home & Living' : category === 'Planning' ? 'Planning & Organization' : category}
-                    </h2>
-                    <p className={`text-sm ${style.mutedText}`}>
-                      {style.description}
-                    </p>
                   </div>
-                </div>
-                
-                <ProductCarousel items={items} />
-              </section>
-            );
-          })
-        )}
+                  
+                  <ProductCarousel items={items} />
+                </section>
+              );
+            })
+          )}
+        </div>
       </div>
     </div>
   );
