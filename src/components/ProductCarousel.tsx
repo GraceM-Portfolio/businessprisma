@@ -35,34 +35,27 @@ export default function ProductCarousel({ items }: { items: any[] }) {
     }
   };
 
-  if (!items || items.length <= 3) {
-    return (
-      <div className="flex overflow-x-auto gap-6 no-scrollbar pb-4 pt-2 px-2 w-full">
-        {items.map((product: any) => (
-          <div key={product.id} className="shrink-0 w-[85vw] sm:w-[280px]">
-            <ProductCard product={product} />
-          </div>
-        ))}
-      </div>
-    );
-  }
+  if (!items || items.length === 0) return null;
 
   return (
-    <div className="relative group/carousel w-full max-w-full">
+    // Flex container to hold the arrows and the track together
+    <div className="flex items-center gap-4 w-full max-w-full">
       
-      {/* Left Arrow - Grey Glassmorphism */}
-      <button 
-        onClick={() => scroll('left')}
-        className="absolute left-0 md:-left-6 top-[35%] -translate-y-1/2 z-20 w-12 h-12 bg-gray-200/60 backdrop-blur-xl border border-white/60 shadow-[0_4px_20px_rgba(0,0,0,0.08)] rounded-full flex items-center justify-center text-gray-800 hover:bg-gray-300/80 hover:text-black hover:scale-110 transition-all duration-300"
-        aria-label="Previous items"
-      >
-        <ChevronLeft className="w-6 h-6 ml-0.5" strokeWidth={2} />
-      </button>
+      {/* Left Arrow - Desktop Only, sitting outside the track */}
+      {items.length > 3 && (
+        <button 
+          onClick={() => scroll('left')}
+          className="hidden md:flex shrink-0 w-12 h-12 bg-gray-200/60 backdrop-blur-xl border border-white/60 shadow-sm rounded-full items-center justify-center text-gray-800 hover:bg-gray-300/80 hover:text-black hover:scale-105 transition-all duration-300"
+          aria-label="Previous items"
+        >
+          <ChevronLeft className="w-6 h-6 ml-0.5" strokeWidth={2} />
+        </button>
+      )}
 
-      {/* Scrollable Track */}
+      {/* Scrollable Track - flex-1 allows it to fill the space between arrows */}
       <div 
         ref={scrollRef}
-        className="flex overflow-x-auto gap-6 no-scrollbar py-4 px-2 scroll-smooth w-full"
+        className="flex-1 flex overflow-x-auto gap-6 no-scrollbar py-4 scroll-smooth w-full"
       >
         {items.map((product: any) => (
           <div key={product.id} className="shrink-0 w-[85vw] sm:w-[280px]">
@@ -71,14 +64,16 @@ export default function ProductCarousel({ items }: { items: any[] }) {
         ))}
       </div>
 
-      {/* Right Arrow - Grey Glassmorphism */}
-      <button 
-        onClick={() => scroll('right')}
-        className="absolute right-0 md:-right-6 top-[35%] -translate-y-1/2 z-20 w-12 h-12 bg-gray-200/60 backdrop-blur-xl border border-white/60 shadow-[0_4px_20px_rgba(0,0,0,0.08)] rounded-full flex items-center justify-center text-gray-800 hover:bg-gray-300/80 hover:text-black hover:scale-110 transition-all duration-300"
-        aria-label="Next items"
-      >
-        <ChevronRight className="w-6 h-6 mr-0.5" strokeWidth={2} />
-      </button>
+      {/* Right Arrow - Desktop Only, sitting outside the track */}
+      {items.length > 3 && (
+        <button 
+          onClick={() => scroll('right')}
+          className="hidden md:flex shrink-0 w-12 h-12 bg-gray-200/60 backdrop-blur-xl border border-white/60 shadow-sm rounded-full items-center justify-center text-gray-800 hover:bg-gray-300/80 hover:text-black hover:scale-105 transition-all duration-300"
+          aria-label="Next items"
+        >
+          <ChevronRight className="w-6 h-6 mr-0.5" strokeWidth={2} />
+        </button>
+      )}
 
     </div>
   );
