@@ -29,7 +29,7 @@ export default function Footer() {
           <ul className="space-y-2 text-sm text-brand-cream/60">
             <li><Link href="/help" className="hover:text-brand-cream transition-colors">Help Center</Link></li>
             <li><Link href="/contact" className="hover:text-brand-cream transition-colors">Contact</Link></li>
-            {/* THIS IS THE LINE THAT WAS BROKEN - NOW FIXED */}
+            {/* THIS IS THE FIXED LINE */}
             <li><Link href="/terms" className="hover:text-brand-cream transition-colors">Terms & Privacy</Link></li>
           </ul>
         </div>
