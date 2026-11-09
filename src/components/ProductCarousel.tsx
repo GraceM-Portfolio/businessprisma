@@ -50,13 +50,13 @@ export default function ProductCarousel({ items }: { items: any[] }) {
   return (
     <div className="relative group/carousel w-full max-w-full">
       
-      {/* Left Arrow - Modern Floating */}
+      {/* Left Arrow - Black Glassmorphism */}
       <button 
         onClick={() => scroll('left')}
-        className="absolute left-0 md:-left-6 top-[35%] -translate-y-1/2 z-20 w-12 h-12 bg-white/80 backdrop-blur-xl border border-white/50 shadow-[0_4px_20px_rgba(0,0,0,0.08)] rounded-full flex items-center justify-center text-black hover:bg-black hover:text-white transition-all duration-300 hover:scale-110"
+        className="absolute left-0 md:-left-6 top-[35%] -translate-y-1/2 z-20 w-12 h-12 bg-black/40 backdrop-blur-2xl border border-white/20 shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] rounded-full flex items-center justify-center text-white hover:bg-black/60 hover:scale-110 transition-all duration-300"
         aria-label="Previous items"
       >
-        <ChevronLeft className="w-6 h-6 ml-0.5" strokeWidth={1.5} />
+        <ChevronLeft className="w-6 h-6 ml-0.5" strokeWidth={2} />
       </button>
 
       {/* Scrollable Track */}
@@ -71,13 +71,13 @@ export default function ProductCarousel({ items }: { items: any[] }) {
         ))}
       </div>
 
-      {/* Right Arrow - Modern Floating */}
+      {/* Right Arrow - Black Glassmorphism */}
       <button 
         onClick={() => scroll('right')}
-        className="absolute right-0 md:-right-6 top-[35%] -translate-y-1/2 z-20 w-12 h-12 bg-white/80 backdrop-blur-xl border border-white/50 shadow-[0_4px_20px_rgba(0,0,0,0.08)] rounded-full flex items-center justify-center text-black hover:bg-black hover:text-white transition-all duration-300 hover:scale-110"
+        className="absolute right-0 md:-right-6 top-[35%] -translate-y-1/2 z-20 w-12 h-12 bg-black/40 backdrop-blur-2xl border border-white/20 shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] rounded-full flex items-center justify-center text-white hover:bg-black/60 hover:scale-110 transition-all duration-300"
         aria-label="Next items"
       >
-        <ChevronRight className="w-6 h-6 mr-0.5" strokeWidth={1.5} />
+        <ChevronRight className="w-6 h-6 mr-0.5" strokeWidth={2} />
       </button>
 
     </div>
