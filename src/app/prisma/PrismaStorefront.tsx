@@ -13,7 +13,6 @@ const sectionStyles: Record<string, {
   description: string
 }> = {
   'Celebrations': {
-    // Frosted Peach/Glass
     bg: 'bg-[#fdf4ed]/60 backdrop-blur-2xl border-white/60 shadow-[0_8px_32px_0_rgba(0,0,0,0.04)]',
     textColor: 'text-black',
     mutedText: 'text-black/70',
@@ -22,7 +21,6 @@ const sectionStyles: Record<string, {
     description: 'Beautifully designed wedding planners, invitations, and celebration kits for life\'s biggest days.',
   },
   'Planning': {
-    // Frosted Sage/Glass
     bg: 'bg-[#e8f0ea]/60 backdrop-blur-2xl border-white/60 shadow-[0_8px_32px_0_rgba(0,0,0,0.04)]',
     textColor: 'text-black',
     mutedText: 'text-black/70',
@@ -31,7 +29,6 @@ const sectionStyles: Record<string, {
     description: 'Budget dashboards, household systems, and planners to bring structure and calm to your daily routine.',
   },
   'Creative': {
-    // Frosted Lavender/Glass
     bg: 'bg-[#eff1f5]/60 backdrop-blur-2xl border-white/60 shadow-[0_8px_32px_0_rgba(0,0,0,0.04)]',
     textColor: 'text-black',
     mutedText: 'text-black/70',
@@ -40,7 +37,6 @@ const sectionStyles: Record<string, {
     description: 'Journals, digital stickers, and creative kits designed for reflection, memory-keeping, and self-expression.',
   },
   'Home': {
-    // Frosted Sand/Glass
     bg: 'bg-[#f7f1e8]/60 backdrop-blur-2xl border-white/60 shadow-[0_8px_32px_0_rgba(0,0,0,0.04)]',
     textColor: 'text-black',
     mutedText: 'text-black/70',
@@ -49,10 +45,10 @@ const sectionStyles: Record<string, {
     description: 'Room makeover guides, organization systems, and design resources for a home you truly love.',
   },
   'Bundles': {
-    // Frosted Dark Green/Glass
-    bg: 'bg-[#112e25]/90 backdrop-blur-2xl border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.15)]',
+    // CHANGED FROM GREEN TO BLACK
+    bg: 'bg-[#0a0a0a]/95 backdrop-blur-2xl border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.2)]',
     textColor: 'text-white',
-    mutedText: 'text-white/70',
+    mutedText: 'text-white/60',
     icon: <Package className="w-4 h-4" />,
     eyebrow: 'Complete collections. Better value.',
     description: 'Curated bundles that combine our best products so you get everything you need at a premium discount.',
@@ -89,19 +85,14 @@ export default function PrismaStorefront({ allProducts }: { allProducts: any[] }
   });
 
   return (
-    // Added relative wrapper for the background blobs
     <div className="relative w-full max-w-full">
       
-      {/* 
-        BACKGROUND BLOBS 
-        These colorful blurred orbs sit behind the glass sections, 
-        allowing the 'backdrop-blur' to actually show its frosty effect.
-      */}
+      {/* BACKGROUND BLOBS */}
       <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-[#f4cfc3] rounded-full mix-blend-multiply filter blur-[100px] opacity-40 pointer-events-none z-0"></div>
       <div className="absolute top-[20%] right-1/4 w-[400px] h-[400px] bg-[#e8f0ea] rounded-full mix-blend-multiply filter blur-[100px] opacity-50 pointer-events-none z-0"></div>
       <div className="absolute bottom-[20%] left-1/3 w-[500px] h-[500px] bg-[#eff1f5] rounded-full mix-blend-multiply filter blur-[120px] opacity-50 pointer-events-none z-0"></div>
 
-      {/* Main Content (z-10 to sit above the blobs) */}
+      {/* Main Content */}
       <div className="relative z-10 flex flex-col md:flex-row gap-8 lg:gap-12 items-start mt-6 md:mt-12 w-full max-w-full">
         <FilterSidebar 
           type="prisma" 
