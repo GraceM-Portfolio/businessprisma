@@ -22,7 +22,8 @@ export default async function PrismaPage() {
 
   return (
     <div className="bg-brand-cream min-h-screen text-brand-charcoal pb-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 md:pt-12">
+      {/* EXPANDED LAYOUT: max-w-[1600px] */}
+      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 pt-8 md:pt-12">
         
         <div className="bg-[#f4f1ea] text-brand-charcoal rounded-3xl p-8 lg:p-16 mb-8 border border-brand-charcoal/5 shadow-sm">
           <div className="flex items-center gap-3 mb-6 text-brand-charcoal/60">
