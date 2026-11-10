@@ -22,11 +22,6 @@ export default function ProductCard({ product, theme = 'light' }: { product: any
       isBundle ? 'bg-white/5 border border-white/10 rounded-xl p-3' : ''
     }`}>
       
-      {/* 
-        ASPECT RATIO FIX:
-        Standard cards: aspect-[3/2] (wider than 4:3)
-        Bundle cards: aspect-[16/9] (very wide, cinematic rectangle)
-      */}
       <div className={`relative w-full overflow-hidden mb-3 ${
         isBundle ? 'aspect-[16/9] rounded-md' : 'aspect-[3/2] rounded-none'
       } ${isDark || isBundle ? 'bg-[#1a1a1a]' : 'bg-[#e8e4db]'}`}>
