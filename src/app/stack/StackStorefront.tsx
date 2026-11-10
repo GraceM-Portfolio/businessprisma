@@ -44,14 +44,14 @@ export default function StackStorefront({ allProducts }: { allProducts: any[] })
   });
 
   return (
-    <div className="relative w-full max-w-full">
+    <div className="relative w-full">
       <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-blue-900/20 rounded-full mix-blend-screen filter blur-[100px] pointer-events-none z-0"></div>
       <div className="absolute top-[20%] right-1/4 w-[400px] h-[400px] bg-teal-900/20 rounded-full mix-blend-screen filter blur-[100px] pointer-events-none z-0"></div>
 
-      <div className="relative z-10 flex flex-col md:flex-row gap-8 lg:gap-12 items-start mt-6 md:mt-12 w-full max-w-full">
+      <div className="relative z-10 flex flex-col md:flex-row gap-8 lg:gap-12 items-start mt-6 md:mt-12 w-full">
         <FilterSidebar type="stack" activeFilter={activeFilter} setActiveFilter={setActiveFilter} theme="dark" />
         
-        {/* REDUCED VERTICAL SPACE HERE (space-y-10 md:space-y-16) */}
+        {/* Main Content Column */}
         <div className="flex-1 space-y-10 md:space-y-16 w-full min-w-0">
           {sortedCategories.length === 0 ? (
             <div className="text-center py-20 text-white/50 font-medium">No products found for this category.</div>
@@ -63,17 +63,18 @@ export default function StackStorefront({ allProducts }: { allProducts: any[] })
               return (
                 <section 
                   key={category} 
-                  className={`relative w-full overflow-hidden ${
+                  className={`relative w-full ${
                     isBundle 
                       ? 'bg-[#000000] border border-white/40 ring-1 ring-white/20 shadow-[0_0_50px_-10px_rgba(255,255,255,0.2)] rounded-3xl p-6 md:p-10' 
-                      : '' // REMOVED py-4 HERE
+                      : ''
                   }`}
                 >
                   {isBundle && (
-                    <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff0a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0a_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none"></div>
+                    <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff0a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0a_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none rounded-3xl"></div>
                   )}
 
-                  <div className={`relative z-10 flex flex-col md:flex-row md:justify-between md:items-end gap-2 mb-4 border-b ${isBundle ? 'border-white/20' : 'border-white/10'} pb-4`}>
+                  {/* Section Header - Left Aligned */}
+                  <div className={`relative z-10 flex flex-col mb-4 border-b ${isBundle ? 'border-white/20' : 'border-white/10'} pb-4`}>
                     <div>
                       <div className={`flex items-center gap-2 mb-2 text-xs uppercase ${style.eyebrowColor}`}>
                         <span className="w-6 h-[1px] bg-current"></span>
@@ -82,13 +83,14 @@ export default function StackStorefront({ allProducts }: { allProducts: any[] })
                       <h2 className={`text-3xl md:text-4xl font-serif mb-2 ${style.titleColor}`}>
                         {category === 'Starter Kit' ? 'Starter Kits' : category === 'UI Kit' ? 'UI Kits' : category === 'Components' ? 'Component Packs' : category}
                       </h2>
-                      <p className={`text-sm md:text-base ${style.descColor} max-w-lg`}>
+                      <p className={`text-sm md:text-base ${style.descColor} max-w-2xl`}>
                         {style.description}
                       </p>
                     </div>
                   </div>
                   
-                  <div className="relative z-10">
+                  {/* Carousel */}
+                  <div className="relative z-10 -mx-4 sm:-mx-6 lg:-mx-8">
                     <ProductCarousel items={items} theme="dark" />
                   </div>
                 </section>
