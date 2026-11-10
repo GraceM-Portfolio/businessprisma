@@ -37,11 +37,11 @@ const sectionStyles: Record<string, {
     description: 'Drop-in React components with accessibility and performance built-in.',
   },
   'Bundles': {
-    // TECH-SAVVY NEON CYAN/GREEN STYLING
+    // CHANGED TO WHITE ACCENTS
     titleColor: 'text-white',
-    eyebrowColor: 'text-[#00FFCC] font-mono font-bold tracking-widest', 
-    descColor: 'text-[#00FFCC]/70',
-    icon: <Terminal className="w-4 h-4 text-[#00FFCC]" />,
+    eyebrowColor: 'text-white font-mono font-bold tracking-widest', 
+    descColor: 'text-white/70',
+    icon: <Terminal className="w-4 h-4 text-white" />,
     eyebrow: 'sys.bundle_collection.init()',
     description: 'Get the ultimate developer toolkit with our curated bundles at a discounted price.',
   },
@@ -107,17 +107,17 @@ export default function StackStorefront({ allProducts }: { allProducts: any[] })
                   key={category} 
                   className={`relative w-full overflow-hidden ${
                     isBundle 
-                      // PITCH BLACK WITH NEON CYAN GLOW
-                      ? 'bg-[#000000] border border-[#00FFCC]/40 ring-1 ring-[#00FFCC]/20 shadow-[0_0_50px_-10px_rgba(0,255,204,0.3)] rounded-3xl p-6 md:p-10' 
+                      // PITCH BLACK WITH WHITE GLOW & BORDER
+                      ? 'bg-[#000000] border border-white/40 ring-1 ring-white/20 shadow-[0_0_50px_-10px_rgba(255,255,255,0.2)] rounded-3xl p-6 md:p-10' 
                       : 'py-4'
                   }`}
                 >
-                  {/* Tech Grid Background specifically for the Bundle section */}
+                  {/* Tech Grid Background specifically for the Bundle section (Now White) */}
                   {isBundle && (
-                    <div className="absolute inset-0 bg-[linear-gradient(to_right,#00ffcc0a_1px,transparent_1px),linear-gradient(to_bottom,#00ffcc0a_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none"></div>
+                    <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff0a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0a_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none"></div>
                   )}
 
-                  <div className={`relative z-10 flex flex-col md:flex-row md:justify-between md:items-end gap-2 mb-8 border-b ${isBundle ? 'border-[#00FFCC]/20' : 'border-white/10'} pb-4`}>
+                  <div className={`relative z-10 flex flex-col md:flex-row md:justify-between md:items-end gap-2 mb-8 border-b ${isBundle ? 'border-white/20' : 'border-white/10'} pb-4`}>
                     <div>
                       <div className={`flex items-center gap-2 mb-2 text-xs uppercase ${style.eyebrowColor}`}>
                         <span className="w-6 h-[1px] bg-current"></span>
