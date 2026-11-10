@@ -17,12 +17,14 @@ export default function ProductCard({ product }: { product: any }) {
   };
 
   return (
-    // Removed white background and heavy borders. Transparent by default.
     <div className={`group flex flex-col h-full transition-all duration-300 ${
       isBundle ? 'bg-white/5 border border-white/10 rounded-xl p-3' : ''
     }`}>
       
-      <div className="relative w-full aspect-[4/3] bg-[#e8e4db] rounded-xl overflow-hidden mb-3">
+      {/* IMAGE CONTAINER - Rectangle for standard products, Rounded for Bundles */}
+      <div className={`relative w-full aspect-[4/3] bg-[#e8e4db] overflow-hidden mb-3 ${
+        isBundle ? 'rounded-lg' : 'rounded-none'
+      }`}>
         <Link href={`/product/${product.slug || product.id}`} className="block w-full h-full">
           {product.image_url ? (
             <Image 
@@ -50,6 +52,7 @@ export default function ProductCard({ product }: { product: any }) {
         )}
       </div>
       
+      {/* CONTENT SECTION */}
       <div className="flex flex-col flex-grow px-1">
         
         <Link href={`/product/${product.slug || product.id}`} className="mb-1">
