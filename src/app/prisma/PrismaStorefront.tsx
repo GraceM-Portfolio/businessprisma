@@ -13,41 +13,42 @@ const sectionStyles: Record<string, {
   description: string
 }> = {
   'Celebrations': {
-    titleColor: 'text-black',        // Main title is black
-    eyebrowColor: 'text-[#C77547]',  // Eyebrow keeps its color
+    titleColor: 'text-black',
+    eyebrowColor: 'text-[#C77547]',
     descColor: 'text-[#A34F22]/80',
     icon: <Heart className="w-4 h-4" />,
     eyebrow: 'For the moments that matter',
     description: 'Beautifully designed wedding planners, invitations, and celebration kits for life\'s biggest days.',
   },
   'Planning': {
-    titleColor: 'text-black',        // Main title is black
-    eyebrowColor: 'text-[#2C4F42]',  // Eyebrow keeps its color
+    titleColor: 'text-black',
+    eyebrowColor: 'text-[#2C4F42]',
     descColor: 'text-[#112E25]/80',
     icon: <Compass className="w-4 h-4" />,
     eyebrow: 'Clarity for everyday life',
     description: 'Budget dashboards, household systems, and planners to bring structure and calm to your daily routine.',
   },
   'Creative': {
-    titleColor: 'text-black',        // Main title is black
-    eyebrowColor: 'text-[#6A5A8A]',  // Eyebrow keeps its color
+    titleColor: 'text-black',
+    eyebrowColor: 'text-[#6A5A8A]',
     descColor: 'text-[#4A3B66]/80',
     icon: <PenTool className="w-4 h-4" />,
     eyebrow: 'Make space for creativity',
     description: 'Journals, digital stickers, and creative kits designed for reflection, memory-keeping, and self-expression.',
   },
   'Home': {
-    titleColor: 'text-black',        // Main title is black
-    eyebrowColor: 'text-[#7A5C4A]',  // Eyebrow keeps its color
+    titleColor: 'text-black',
+    eyebrowColor: 'text-[#7A5C4A]',
     descColor: 'text-[#5C4033]/80',
     icon: <Home className="w-4 h-4" />,
     eyebrow: 'Make your space work beautifully',
     description: 'Room makeover guides, organization systems, and design resources for a home you truly love.',
   },
   'Bundles': {
-    titleColor: 'text-black',
-    eyebrowColor: 'text-black/60',
-    descColor: 'text-black/70',
+    // Text changed to white/light to contrast with the dark container
+    titleColor: 'text-white',
+    eyebrowColor: 'text-[#f4cfc3]', 
+    descColor: 'text-white/70',
     icon: <Package className="w-4 h-4" />,
     eyebrow: 'Complete collections. Better value.',
     description: 'Curated bundles that combine our best products so you get everything you need at a premium discount.',
@@ -104,10 +105,18 @@ export default function PrismaStorefront({ allProducts }: { allProducts: any[] }
               const isBundles = category === 'Bundles';
               
               return (
-                <section key={category} className="relative w-full">
+                <section 
+                  key={category} 
+                  // Conditional styling: Dark glass container for Bundles, transparent for the rest
+                  className={`relative w-full ${
+                    isBundles 
+                      ? 'bg-[#0a0a0a]/95 backdrop-blur-2xl border border-white/10 rounded-3xl p-6 md:p-10 shadow-[0_8px_32px_0_rgba(0,0,0,0.2)]' 
+                      : 'py-4'
+                  }`}
+                >
                   
                   {/* Section Header */}
-                  <div className={`flex flex-col md:flex-row md:justify-between md:items-end gap-2 mb-8 border-b border-black/10 pb-4`}>
+                  <div className={`flex flex-col md:flex-row md:justify-between md:items-end gap-2 mb-8 border-b ${isBundles ? 'border-white/10' : 'border-black/10'} pb-4`}>
                     <div>
                       <div className={`flex items-center gap-2 mb-2 text-xs font-bold uppercase tracking-[0.2em] ${style.eyebrowColor}`}>
                         <span className="w-6 h-[1px] bg-current"></span>
