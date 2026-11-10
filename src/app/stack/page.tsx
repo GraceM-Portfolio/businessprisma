@@ -1,71 +1,42 @@
-import FilterSidebar from "@/components/FilterSidebar";
-import ProductCarousel from "@/components/ProductCarousel";
-import { Code2, LayoutGrid } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
+import { Code2 } from "lucide-react";
+import StackStorefront from "./StackStorefront";
 
 export const dynamic = 'force-dynamic';
 
-const sectionStyles: Record<string, { bg: string, pillBg: string, pillText: string }> = {
-  'Starter Kit': { bg: 'bg-[#e8f0ea]', pillBg: 'bg-[#112e25]', pillText: 'text-[#e8f0ea]' }, 
-  'UI Kit': { bg: 'bg-[#fdf4ed]', pillBg: 'bg-[#d4a373]', pillText: 'text-white' }, 
-  'Components': { bg: 'bg-[#eff1f5]', pillBg: 'bg-[#4a5568]', pillText: 'text-white' }, 
-  'Default': { bg: 'bg-brand-light', pillBg: 'bg-brand-charcoal', pillText: 'text-brand-cream' }
-};
-
 export default async function StackPage() {
   const supabase = await createClient();
-  const { data: allProducts } = await supabase.from('products').select('*').eq('is_published', true);
-
-  const products = allProducts?.filter(p => p.tags?.includes('Starter Kit') || p.tags?.includes('UI Kit') || p.tags?.includes('Components')) || [];
   
-  const groupedProducts = products.reduce((acc: any, product) => {
-    let category = product.tags?.[0] || 'Other Tools';
-    if (!acc[category]) acc[category] = [];
-    acc[category].push(product);
-    return acc;
-  }, {});
+  const { data: allProducts } = await supabase
+    .from('products')
+    .select('*')
+    .eq('is_published', true);
+
+  const stackProducts = allProducts?.filter(p => 
+    p.tags?.includes('Starter Kit') || 
+    p.tags?.includes('UI Kit') || 
+    p.tags?.includes('Components') ||
+    p.tags?.includes('Bundles')
+  ) || [];
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <div className="bg-brand-green text-brand-cream rounded-3xl p-8 lg:p-12 mb-12">
-        <div className="flex items-center gap-3 mb-4 text-brand-peach">
-          <Code2 className="w-6 h-6" />
-          <span className="font-semibold tracking-wider text-sm uppercase">Stack Collection</span>
-        </div>
-        <h1 className="text-4xl lg:text-5xl mb-4 font-serif">Build faster. Ship smarter.</h1>
-        <p className="text-brand-cream/80 max-w-lg">Premium developer tools, UI kits and starter templates.</p>
-      </div>
-
-      <div className="flex flex-col md:flex-row gap-12 items-start">
-        <FilterSidebar type="stack" />
+    <div className="bg-brand-cream min-h-screen text-brand-charcoal pb-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 md:pt-12">
         
-        <div className="flex-1 space-y-12 w-full min-w-0">
-          {Object.entries(groupedProducts).map(([category, items]: [string, any]) => {
-            const style = sectionStyles[category] || sectionStyles['Default'];
-            return (
-              <section key={category} className={`${style.bg} p-6 lg:p-8 rounded-3xl relative overflow-hidden`}>
-                
-                {/* Header */}
-                <div className="mb-6 pb-2 flex justify-between items-end relative z-10">
-                  <div className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full ${style.pillBg} ${style.pillText}`}>
-                    <LayoutGrid className="w-4 h-4" />
-                    <h2 className="text-sm font-bold tracking-wider uppercase">{category}s</h2>
-                  </div>
-                  <span className="text-xs font-semibold text-brand-charcoal/40 uppercase tracking-wider hidden sm:block">
-                    Swipe to explore
-                  </span>
-                </div>
-                
-                {/* Carousel */}
-                <ProductCarousel items={items} />
-
-                {/* Subtle Fade on the right to indicate more content */}
-                <div className={`absolute top-0 right-0 w-16 h-full bg-gradient-to-l ${style.bg} to-transparent z-0 pointer-events-none opacity-50`}></div>
-
-              </section>
-            );
-          })}
+        <div className="bg-[#f4f1ea] text-brand-charcoal rounded-3xl p-8 lg:p-16 mb-8 border border-brand-charcoal/5 shadow-sm">
+          <div className="flex items-center gap-3 mb-6 text-brand-charcoal/60">
+            <Code2 className="w-5 h-5" />
+            <span className="font-bold tracking-[0.2em] text-[10px] md:text-xs uppercase">The Stack Collection</span>
+          </div>
+          <h1 className="text-4xl md:text-6xl lg:text-7xl mb-6 font-serif max-w-3xl leading-[1.1] text-brand-charcoal">
+            Build faster. <br className="hidden md:block"/><span className="italic text-brand-charcoal/70">Ship smarter.</span>
+          </h1>
+          <p className="text-brand-charcoal/60 font-medium max-w-lg text-sm md:text-base leading-relaxed">
+            Premium developer tools, UI kits and starter templates to help you build modern web applications with ease.
+          </p>
         </div>
+
+        <StackStorefront allProducts={stackProducts} />
       </div>
     </div>
   );
