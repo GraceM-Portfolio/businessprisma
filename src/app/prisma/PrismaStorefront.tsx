@@ -47,10 +47,11 @@ export default function PrismaStorefront({ allProducts }: { allProducts: any[] }
   });
 
   return (
-    <div className="relative w-full max-w-full">
-      <div className="relative z-10 flex flex-col md:flex-row gap-8 lg:gap-12 items-start mt-6 md:mt-12 w-full max-w-full">
+    <div className="relative w-full">
+      <div className="relative z-10 flex flex-col md:flex-row gap-8 lg:gap-12 items-start mt-6 md:mt-12 w-full">
         <FilterSidebar type="prisma" activeFilter={activeFilter} setActiveFilter={setActiveFilter} theme="light" />
         
+        {/* Main Content Column */}
         <div className="flex-1 space-y-10 md:space-y-16 w-full min-w-0">
           {sortedCategories.length === 0 ? (
             <div className="text-center py-20 text-brand-charcoal/50 font-medium">No products found for this category.</div>
@@ -62,7 +63,7 @@ export default function PrismaStorefront({ allProducts }: { allProducts: any[] }
               return (
                 <section 
                   key={category} 
-                  className={`relative w-full overflow-hidden ${
+                  className={`relative w-full ${
                     isBundle 
                       ? 'bg-[#2b1a14]/80 backdrop-blur-2xl border border-[#d4a373]/30 shadow-[0_8px_32px_0_rgba(43,26,20,0.3)] rounded-3xl p-6 md:p-10' 
                       : ''
@@ -72,7 +73,8 @@ export default function PrismaStorefront({ allProducts }: { allProducts: any[] }
                     <div className="absolute top-0 right-0 w-64 h-64 bg-[#d4a373]/10 rounded-full blur-[80px] pointer-events-none"></div>
                   )}
 
-                  <div className={`relative z-10 flex flex-col md:flex-row md:justify-between md:items-end gap-2 mb-4 border-b ${isBundle ? 'border-[#d4a373]/20' : 'border-black/10'} pb-4`}>
+                  {/* Section Header - Left Aligned */}
+                  <div className={`relative z-10 flex flex-col mb-4 border-b ${isBundle ? 'border-[#d4a373]/20' : 'border-black/10'} pb-4`}>
                     <div>
                       <div className={`flex items-center gap-2 mb-2 text-xs uppercase ${style.eyebrowColor}`}>
                         <span className="w-6 h-[1px] bg-current"></span>
@@ -81,14 +83,15 @@ export default function PrismaStorefront({ allProducts }: { allProducts: any[] }
                       <h2 className={`text-3xl md:text-4xl font-serif mb-2 ${style.titleColor}`}>
                         {category === 'Home' ? 'Home & Living' : category === 'Planning' ? 'Planning & Organization' : category}
                       </h2>
-                      <p className={`text-sm md:text-base ${style.descColor} max-w-lg`}>
+                      <p className={`text-sm md:text-base ${style.descColor} max-w-2xl`}>
                         {style.description}
                       </p>
                     </div>
                   </div>
                   
-                  <div className="relative z-10">
-                    {/* FIX: Only the Bundles section gets the dark theme. The rest are light. */}
+                  {/* Carousel */}
+                  <div className="relative z-10 -mx-4 sm:-mx-6 lg:-mx-8"> 
+                    {/* Negative margin pulls it out. The pr in ProductCarousel handles the right side gap */}
                     <ProductCarousel items={items} theme={isBundle ? "dark" : "light"} />
                   </div>
                 </section>
