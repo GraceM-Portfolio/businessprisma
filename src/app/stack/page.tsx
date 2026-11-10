@@ -23,15 +23,15 @@ export default async function StackPage() {
     <div className="bg-brand-cream min-h-screen text-brand-charcoal pb-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 md:pt-12">
         
-        {/* BLACK HERO SECTION */}
-        <div className="bg-[#0a0a0a] text-white rounded-3xl p-8 lg:p-16 mb-8 border border-white/10 shadow-lg relative overflow-hidden">
-          {/* Subtle glow effect */}
-          <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-[120px] pointer-events-none"></div>
-
+        {/* SOLID BLACK HERO SECTION */}
+        <div className="bg-black text-white rounded-3xl p-8 lg:p-16 mb-8 border border-white/10 shadow-2xl relative overflow-hidden">
+          {/* Subtle tech grid pattern for the hero */}
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff0a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0a_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none"></div>
+          
           <div className="relative z-10">
             <div className="flex items-center gap-3 mb-6 text-white/50">
               <Code2 className="w-5 h-5" />
-              <span className="font-bold tracking-[0.2em] text-[10px] md:text-xs uppercase">The Stack Collection</span>
+              <span className="font-bold tracking-[0.2em] text-[10px] md:text-xs uppercase font-mono">The Stack Collection</span>
             </div>
             <h1 className="text-4xl md:text-6xl lg:text-7xl mb-6 font-serif max-w-3xl leading-[1.1] text-white">
               Build faster. <br className="hidden md:block"/><span className="italic text-white/70">Ship smarter.</span>
