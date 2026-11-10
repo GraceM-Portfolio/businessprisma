@@ -14,7 +14,7 @@ const sectionStyles: Record<string, {
 }> = {
   'Starter Kit': {
     titleColor: 'text-white',
-    eyebrowColor: 'text-[#60A5FA]', // Light Blue
+    eyebrowColor: 'text-[#60A5FA]', 
     descColor: 'text-white/60',
     icon: <LayoutTemplate className="w-4 h-4" />,
     eyebrow: 'The perfect starting point',
@@ -22,7 +22,7 @@ const sectionStyles: Record<string, {
   },
   'UI Kit': {
     titleColor: 'text-white',
-    eyebrowColor: 'text-[#2DD4BF]', // Teal
+    eyebrowColor: 'text-[#2DD4BF]', 
     descColor: 'text-white/60',
     icon: <MonitorPlay className="w-4 h-4" />,
     eyebrow: 'Design faster',
@@ -30,17 +30,18 @@ const sectionStyles: Record<string, {
   },
   'Components': {
     titleColor: 'text-white',
-    eyebrowColor: 'text-[#A78BFA]', // Light Purple
+    eyebrowColor: 'text-[#A78BFA]', 
     descColor: 'text-white/60',
     icon: <Code2 className="w-4 h-4" />,
     eyebrow: 'Build with confidence',
     description: 'Drop-in React components with accessibility and performance built-in.',
   },
   'Bundles': {
+    // TECH-SAVVY NEON CYAN/GREEN STYLING
     titleColor: 'text-white',
-    eyebrowColor: 'text-cyan-400 font-mono', 
-    descColor: 'text-cyan-100/60',
-    icon: <Terminal className="w-4 h-4 text-cyan-400" />,
+    eyebrowColor: 'text-[#00FFCC] font-mono font-bold tracking-widest', 
+    descColor: 'text-[#00FFCC]/70',
+    icon: <Terminal className="w-4 h-4 text-[#00FFCC]" />,
     eyebrow: 'sys.bundle_collection.init()',
     description: 'Get the ultimate developer toolkit with our curated bundles at a discounted price.',
   },
@@ -106,17 +107,19 @@ export default function StackStorefront({ allProducts }: { allProducts: any[] })
                   key={category} 
                   className={`relative w-full overflow-hidden ${
                     isBundle 
-                      ? 'bg-[#050505] border border-cyan-500/30 ring-1 ring-cyan-500/20 shadow-[0_0_50px_-12px_rgba(6,182,212,0.4)] rounded-3xl p-6 md:p-10' 
+                      // PITCH BLACK WITH NEON CYAN GLOW
+                      ? 'bg-[#000000] border border-[#00FFCC]/40 ring-1 ring-[#00FFCC]/20 shadow-[0_0_50px_-10px_rgba(0,255,204,0.3)] rounded-3xl p-6 md:p-10' 
                       : 'py-4'
                   }`}
                 >
+                  {/* Tech Grid Background specifically for the Bundle section */}
                   {isBundle && (
-                    <div className="absolute inset-0 bg-[linear-gradient(to_right,#06b6d40a_1px,transparent_1px),linear-gradient(to_bottom,#06b6d40a_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none"></div>
+                    <div className="absolute inset-0 bg-[linear-gradient(to_right,#00ffcc0a_1px,transparent_1px),linear-gradient(to_bottom,#00ffcc0a_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none"></div>
                   )}
 
-                  <div className={`relative z-10 flex flex-col md:flex-row md:justify-between md:items-end gap-2 mb-8 border-b ${isBundle ? 'border-cyan-500/20' : 'border-white/10'} pb-4`}>
+                  <div className={`relative z-10 flex flex-col md:flex-row md:justify-between md:items-end gap-2 mb-8 border-b ${isBundle ? 'border-[#00FFCC]/20' : 'border-white/10'} pb-4`}>
                     <div>
-                      <div className={`flex items-center gap-2 mb-2 text-xs font-bold uppercase tracking-[0.2em] ${style.eyebrowColor}`}>
+                      <div className={`flex items-center gap-2 mb-2 text-xs uppercase ${style.eyebrowColor}`}>
                         <span className="w-6 h-[1px] bg-current"></span>
                         {style.eyebrow}
                       </div>
