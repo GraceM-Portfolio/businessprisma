@@ -20,12 +20,12 @@ export default async function StackPage() {
   ) || [];
 
   return (
-    <div className="bg-brand-cream min-h-screen text-brand-charcoal pb-20">
+    // Changed to dark background for the whole page
+    <div className="bg-[#0a0a0a] min-h-screen text-white pb-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 md:pt-12">
         
-        {/* SOLID BLACK HERO SECTION */}
+        {/* HERO SECTION */}
         <div className="bg-black text-white rounded-3xl p-8 lg:p-16 mb-8 border border-white/10 shadow-2xl relative overflow-hidden">
-          {/* Subtle tech grid pattern for the hero */}
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff0a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0a_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none"></div>
           
           <div className="relative z-10">
