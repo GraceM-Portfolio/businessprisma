@@ -13,7 +13,7 @@ export default function ProductCarousel({ items, theme = 'light' }: { items: any
       if (!firstCard) return;
       
       const cardWidth = firstCard.clientWidth;
-      const gap = 24;
+      const gap = 16; // Updated from 24 to 16 to match gap-4
       const scrollAmount = (cardWidth + gap) * 3; 
 
       const isAtStart = current.scrollLeft <= 10;
@@ -52,9 +52,10 @@ export default function ProductCarousel({ items, theme = 'light' }: { items: any
         </button>
       )}
 
+      {/* Changed gap-6 to gap-4 for tighter spacing */}
       <div 
         ref={scrollRef}
-        className="flex-1 flex overflow-x-auto gap-6 no-scrollbar py-4 scroll-smooth w-full"
+        className="flex-1 flex overflow-x-auto gap-4 no-scrollbar py-4 scroll-smooth w-full"
       >
         {items.map((product: any) => (
           <div key={product.id} className="shrink-0 w-[85vw] sm:w-[320px] lg:w-[340px]">
