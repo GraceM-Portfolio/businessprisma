@@ -5,7 +5,6 @@ import ProductCarousel from "@/components/ProductCarousel";
 import { Heart, Compass, PenTool, Home, Package, LayoutGrid } from "lucide-react";
 
 const sectionStyles: Record<string, {
-  bg: string,
   titleColor: string,
   eyebrowColor: string,
   descColor: string,
@@ -14,7 +13,6 @@ const sectionStyles: Record<string, {
   description: string
 }> = {
   'Celebrations': {
-    bg: 'bg-[#fdf4ed]/60 backdrop-blur-2xl border-white/60 shadow-[0_8px_32px_0_rgba(0,0,0,0.04)]',
     titleColor: 'text-[#A34F22]',    // Dark Orange/Terracotta
     eyebrowColor: 'text-[#C77547]',
     descColor: 'text-[#A34F22]/80',
@@ -23,7 +21,6 @@ const sectionStyles: Record<string, {
     description: 'Beautifully designed wedding planners, invitations, and celebration kits for life\'s biggest days.',
   },
   'Planning': {
-    bg: 'bg-[#e8f0ea]/60 backdrop-blur-2xl border-white/60 shadow-[0_8px_32px_0_rgba(0,0,0,0.04)]',
     titleColor: 'text-[#112E25]',    // Deep Forest Green
     eyebrowColor: 'text-[#2C4F42]',
     descColor: 'text-[#112E25]/80',
@@ -32,7 +29,6 @@ const sectionStyles: Record<string, {
     description: 'Budget dashboards, household systems, and planners to bring structure and calm to your daily routine.',
   },
   'Creative': {
-    bg: 'bg-[#eff1f5]/60 backdrop-blur-2xl border-white/60 shadow-[0_8px_32px_0_rgba(0,0,0,0.04)]',
     titleColor: 'text-[#4A3B66]',    // Dark Plum/Purple
     eyebrowColor: 'text-[#6A5A8A]',
     descColor: 'text-[#4A3B66]/80',
@@ -41,7 +37,6 @@ const sectionStyles: Record<string, {
     description: 'Journals, digital stickers, and creative kits designed for reflection, memory-keeping, and self-expression.',
   },
   'Home': {
-    bg: 'bg-[#f7f1e8]/60 backdrop-blur-2xl border-white/60 shadow-[0_8px_32px_0_rgba(0,0,0,0.04)]',
     titleColor: 'text-[#5C4033]',    // Dark Brown/Mocha
     eyebrowColor: 'text-[#7A5C4A]',
     descColor: 'text-[#5C4033]/80',
@@ -50,7 +45,6 @@ const sectionStyles: Record<string, {
     description: 'Room makeover guides, organization systems, and design resources for a home you truly love.',
   },
   'Bundles': {
-    bg: 'bg-[#0a0a0a]/95 backdrop-blur-2xl border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.2)]',
     titleColor: 'text-white',
     eyebrowColor: 'text-white/60',
     descColor: 'text-white/70',
@@ -59,7 +53,6 @@ const sectionStyles: Record<string, {
     description: 'Curated bundles that combine our best products so you get everything you need at a premium discount.',
   },
   'Default': {
-    bg: 'bg-white/60 backdrop-blur-2xl border-white/60',
     titleColor: 'text-black',
     eyebrowColor: 'text-black/60',
     descColor: 'text-black/70',
@@ -92,12 +85,6 @@ export default function PrismaStorefront({ allProducts }: { allProducts: any[] }
 
   return (
     <div className="relative w-full max-w-full">
-      
-      {/* BACKGROUND BLOBS */}
-      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-[#f4cfc3] rounded-full mix-blend-multiply filter blur-[100px] opacity-40 pointer-events-none z-0"></div>
-      <div className="absolute top-[20%] right-1/4 w-[400px] h-[400px] bg-[#e8f0ea] rounded-full mix-blend-multiply filter blur-[100px] opacity-50 pointer-events-none z-0"></div>
-      <div className="absolute bottom-[20%] left-1/3 w-[500px] h-[500px] bg-[#eff1f5] rounded-full mix-blend-multiply filter blur-[120px] opacity-50 pointer-events-none z-0"></div>
-
       {/* Main Content */}
       <div className="relative z-10 flex flex-col md:flex-row gap-8 lg:gap-12 items-start mt-6 md:mt-12 w-full max-w-full">
         <FilterSidebar 
@@ -106,7 +93,7 @@ export default function PrismaStorefront({ allProducts }: { allProducts: any[] }
           setActiveFilter={setActiveFilter} 
         />
         
-        <div className="flex-1 space-y-8 md:space-y-12 w-full min-w-0">
+        <div className="flex-1 space-y-16 md:space-y-24 w-full min-w-0">
           {sortedCategories.length === 0 ? (
             <div className="text-center py-20 text-brand-charcoal/50 font-medium">
               No products found for this category.
@@ -119,18 +106,24 @@ export default function PrismaStorefront({ allProducts }: { allProducts: any[] }
               return (
                 <section 
                   key={category} 
-                  className={`${style.bg} rounded-3xl p-6 md:p-8 border`}
+                  className={`relative ${
+                    isBundles 
+                      // Keep the dark glass container ONLY for Bundles
+                      ? 'bg-[#0a0a0a]/95 backdrop-blur-2xl border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.2)] rounded-3xl p-6 md:p-8' 
+                      // No background, borders, or shadows for the other sections
+                      : 'py-4' 
+                  }`}
                 >
-                  <div className={`flex flex-col md:flex-row md:justify-between md:items-end gap-2 mb-6 border-b ${isBundles ? 'border-white/10' : 'border-black/10'} pb-4`}>
+                  <div className={`flex flex-col md:flex-row md:justify-between md:items-end gap-2 mb-8 border-b ${isBundles ? 'border-white/10' : 'border-brand-charcoal/20'} pb-4`}>
                     <div>
                       <div className={`flex items-center gap-2 mb-2 text-xs font-bold uppercase tracking-[0.2em] ${style.eyebrowColor}`}>
                         <span className="w-6 h-[1px] bg-current"></span>
                         {style.eyebrow}
                       </div>
-                      <h2 className={`text-2xl md:text-3xl font-serif mb-1 ${style.titleColor}`}>
+                      <h2 className={`text-3xl md:text-4xl font-serif mb-2 ${style.titleColor}`}>
                         {category === 'Home' ? 'Home & Living' : category === 'Planning' ? 'Planning & Organization' : category}
                       </h2>
-                      <p className={`text-sm ${style.descColor}`}>
+                      <p className={`text-sm md:text-base ${style.descColor} max-w-lg`}>
                         {style.description}
                       </p>
                     </div>
