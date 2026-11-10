@@ -4,7 +4,6 @@ import FilterSidebar from "@/components/FilterSidebar";
 import ProductCarousel from "@/components/ProductCarousel";
 import { Heart, Compass, PenTool, Home, Package, LayoutGrid } from "lucide-react";
 
-// ... (sectionStyles remains the same)
 const sectionStyles: Record<string, any> = {
   'Celebrations': {
     titleColor: 'text-black', eyebrowColor: 'text-[#C77547]', descColor: 'text-[#A34F22]/80', icon: <Heart className="w-4 h-4" />, eyebrow: 'For the moments that matter', description: 'Beautifully designed wedding planners, invitations, and celebration kits for life\'s biggest days.',
@@ -52,7 +51,6 @@ export default function PrismaStorefront({ allProducts }: { allProducts: any[] }
       <div className="relative z-10 flex flex-col md:flex-row gap-8 lg:gap-12 items-start mt-6 md:mt-12 w-full max-w-full">
         <FilterSidebar type="prisma" activeFilter={activeFilter} setActiveFilter={setActiveFilter} theme="light" />
         
-        {/* REDUCED VERTICAL SPACE HERE (space-y-10 md:space-y-16) */}
         <div className="flex-1 space-y-10 md:space-y-16 w-full min-w-0">
           {sortedCategories.length === 0 ? (
             <div className="text-center py-20 text-brand-charcoal/50 font-medium">No products found for this category.</div>
@@ -67,7 +65,7 @@ export default function PrismaStorefront({ allProducts }: { allProducts: any[] }
                   className={`relative w-full overflow-hidden ${
                     isBundle 
                       ? 'bg-[#2b1a14]/80 backdrop-blur-2xl border border-[#d4a373]/30 shadow-[0_8px_32px_0_rgba(43,26,20,0.3)] rounded-3xl p-6 md:p-10' 
-                      : '' // REMOVED py-4 HERE
+                      : ''
                   }`}
                 >
                   {isBundle && (
@@ -90,7 +88,8 @@ export default function PrismaStorefront({ allProducts }: { allProducts: any[] }
                   </div>
                   
                   <div className="relative z-10">
-                    <ProductCarousel items={items} theme="dark" />
+                    {/* FIX: Only the Bundles section gets the dark theme. The rest are light. */}
+                    <ProductCarousel items={items} theme={isBundle ? "dark" : "light"} />
                   </div>
                 </section>
               );
