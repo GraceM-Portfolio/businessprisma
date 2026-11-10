@@ -3,7 +3,7 @@ import { useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import ProductCard from "./ProductCard";
 
-export default function ProductCarousel({ items }: { items: any[] }) {
+export default function ProductCarousel({ items, theme = 'light' }: { items: any[], theme?: 'light' | 'dark' }) {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const scroll = (direction: 'left' | 'right') => {
@@ -13,8 +13,7 @@ export default function ProductCarousel({ items }: { items: any[] }) {
       if (!firstCard) return;
       
       const cardWidth = firstCard.clientWidth;
-      const gap = 24; // Matches 'gap-6'
-      // Calculates exactly 3 cards + the gaps between them
+      const gap = 24;
       const scrollAmount = (cardWidth + gap) * 3; 
 
       const isAtStart = current.scrollLeft <= 10;
@@ -40,42 +39,42 @@ export default function ProductCarousel({ items }: { items: any[] }) {
 
   return (
     <div className="flex items-center gap-4 w-full max-w-full">
-      
-      {/* Left Arrow */}
       {items.length > 3 && (
         <button 
           onClick={() => scroll('left')}
-          className="hidden md:flex shrink-0 w-12 h-12 bg-gray-200/60 backdrop-blur-xl border border-white/60 shadow-sm rounded-full items-center justify-center text-gray-800 hover:bg-gray-300/80 hover:text-black hover:scale-105 transition-all duration-300"
-          aria-label="Previous items"
+          className={`hidden md:flex shrink-0 w-12 h-12 backdrop-blur-xl border shadow-sm rounded-full items-center justify-center hover:scale-105 transition-all duration-300 ${
+            theme === 'dark' 
+              ? 'bg-white/10 border-white/20 text-white hover:bg-white/20' 
+              : 'bg-gray-200/60 border-white/60 text-gray-800 hover:bg-gray-300/80'
+          }`}
         >
           <ChevronLeft className="w-6 h-6 ml-0.5" strokeWidth={2} />
         </button>
       )}
 
-      {/* Scrollable Track */}
       <div 
         ref={scrollRef}
         className="flex-1 flex overflow-x-auto gap-6 no-scrollbar py-4 scroll-smooth w-full"
       >
         {items.map((product: any) => (
-          // UPDATED WIDTH: w-[320px] on mobile, w-[340px] on desktop
           <div key={product.id} className="shrink-0 w-[85vw] sm:w-[320px] lg:w-[340px]">
-            <ProductCard product={product} />
+            <ProductCard product={product} theme={theme} />
           </div>
         ))}
       </div>
 
-      {/* Right Arrow */}
       {items.length > 3 && (
         <button 
           onClick={() => scroll('right')}
-          className="hidden md:flex shrink-0 w-12 h-12 bg-gray-200/60 backdrop-blur-xl border border-white/60 shadow-sm rounded-full items-center justify-center text-gray-800 hover:bg-gray-300/80 hover:text-black hover:scale-105 transition-all duration-300"
-          aria-label="Next items"
+          className={`hidden md:flex shrink-0 w-12 h-12 backdrop-blur-xl border shadow-sm rounded-full items-center justify-center hover:scale-105 transition-all duration-300 ${
+            theme === 'dark' 
+              ? 'bg-white/10 border-white/20 text-white hover:bg-white/20' 
+              : 'bg-gray-200/60 border-white/60 text-gray-800 hover:bg-gray-300/80'
+          }`}
         >
           <ChevronRight className="w-6 h-6 mr-0.5" strokeWidth={2} />
         </button>
       )}
-
     </div>
   );
 }
