@@ -19,7 +19,7 @@ export default function Home() {
           <p className="text-lg text-brand-charcoal/70 mb-8 max-w-md">
             Thoughtful digital tools for people who build software, and creative solutions for people reimagining their homes.
           </p>
-          <Link href="/shop" className="inline-flex items-center gap-2 bg-brand-green text-brand-cream px-8 py-3.5 rounded-full font-medium hover:bg-opacity-90 transition-all">
+          <Link href="/shop" className="inline-flex items-center gap-2 bg-black text-brand-cream px-8 py-3.5 rounded-full font-medium hover:bg-gray-800 transition-all">
             Explore Our Collections <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
@@ -34,8 +34,8 @@ export default function Home() {
       {/* TWO CATEGORY BLOCKS */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
         <div className="grid lg:grid-cols-2 gap-6">
-          {/* Stack Block */}
-          <div className="bg-brand-green text-brand-cream p-8 lg:p-12 rounded-3xl relative overflow-hidden flex flex-col justify-between min-h-[400px]">
+          {/* Stack Block - Changed to Black */}
+          <div className="bg-black text-brand-cream p-8 lg:p-12 rounded-3xl relative overflow-hidden flex flex-col justify-between min-h-[400px]">
             <div className="relative z-10">
               <div className="flex items-center gap-2 mb-4">
                 <Code2 className="w-6 h-6" />
@@ -45,7 +45,7 @@ export default function Home() {
               <p className="text-brand-cream/80 mb-8 max-w-sm">
                 Premium developer tools, UI kits and starter templates to help you build modern web applications with ease.
               </p>
-              <Link href="/stack" className="inline-flex items-center gap-2 bg-brand-cream text-brand-green px-6 py-3 rounded-full font-medium hover:bg-brand-peach transition-colors">
+              <Link href="/stack" className="inline-flex items-center gap-2 bg-brand-cream text-black px-6 py-3 rounded-full font-medium hover:bg-brand-peach transition-colors">
                 Shop Stack <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
@@ -76,7 +76,7 @@ export default function Home() {
               <p className="text-brand-charcoal/70 mb-8 max-w-sm">
                 Interior design services and creative digital products to help you design beautiful spaces and live inspired.
               </p>
-              <Link href="/prisma" className="inline-flex items-center gap-2 bg-brand-green text-brand-cream px-6 py-3 rounded-full font-medium hover:bg-opacity-90 transition-colors">
+              <Link href="/prisma" className="inline-flex items-center gap-2 bg-black text-brand-cream px-6 py-3 rounded-full font-medium hover:bg-gray-800 transition-colors">
                 Shop Prisma <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
@@ -107,28 +107,28 @@ export default function Home() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           <div className="flex flex-col items-center gap-3">
             <div className="w-12 h-12 bg-brand-light rounded-full flex items-center justify-center mb-2">
-              <ShieldCheck className="w-6 h-6 text-brand-green" />
+              <ShieldCheck className="w-6 h-6 text-black" />
             </div>
             <h3 className="font-semibold">Secure Checkout</h3>
             <p className="text-sm text-brand-charcoal/60">M-Pesa, Visa, Mastercard and more.</p>
           </div>
           <div className="flex flex-col items-center gap-3">
             <div className="w-12 h-12 bg-brand-light rounded-full flex items-center justify-center mb-2">
-              <Zap className="w-6 h-6 text-brand-green" />
+              <Zap className="w-6 h-6 text-black" />
             </div>
             <h3 className="font-semibold">Instant Access</h3>
             <p className="text-sm text-brand-charcoal/60">Get your digital products immediately after purchase.</p>
           </div>
           <div className="flex flex-col items-center gap-3">
             <div className="w-12 h-12 bg-brand-light rounded-full flex items-center justify-center mb-2">
-              <Award className="w-6 h-6 text-brand-green" />
+              <Award className="w-6 h-6 text-black" />
             </div>
             <h3 className="font-semibold">Trusted Quality</h3>
             <p className="text-sm text-brand-charcoal/60">Carefully curated and professionally designed.</p>
           </div>
           <div className="flex flex-col items-center gap-3">
             <div className="w-12 h-12 bg-brand-light rounded-full flex items-center justify-center mb-2">
-              <Headphones className="w-6 h-6 text-brand-green" />
+              <Headphones className="w-6 h-6 text-black" />
             </div>
             <h3 className="font-semibold">Dedicated Support</h3>
             <p className="text-sm text-brand-charcoal/60">We're here when you need us.</p>
@@ -143,7 +143,7 @@ export default function Home() {
             <span className="text-xs font-bold tracking-widest text-brand-charcoal/50 uppercase mb-2 block">Featured Products</span>
             <h2 className="text-4xl font-serif">Popular Picks</h2>
           </div>
-          <Link href="/shop" className="text-sm font-medium hover:text-brand-green flex items-center gap-1 transition-colors">
+          <Link href="/shop" className="text-sm font-medium hover:text-black flex items-center gap-1 transition-colors">
             View all products <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
@@ -169,11 +169,11 @@ export default function Home() {
               <p className="text-brand-charcoal/70 mb-6">
                 StackPrisma brings together technology and design to help you build, create and live better. Whether you're a developer, a designer, or someone with big ideas — you're in the right place.
               </p>
-              <Link href="/about" className="inline-flex items-center gap-2 bg-brand-green text-brand-cream px-6 py-3 rounded-full font-medium hover:bg-opacity-90 transition-colors">
+              <Link href="/about" className="inline-flex items-center gap-2 bg-black text-brand-cream px-6 py-3 rounded-full font-medium hover:bg-gray-800 transition-colors">
                 Learn More <ArrowRight className="w-4 h-4" />
               </Link>
            </div>
-           <div className="text-brand-green font-serif italic text-3xl lg:text-4xl max-w-[250px] leading-tight rotate-[-5deg]">
+           <div className="text-black font-serif italic text-3xl lg:text-4xl max-w-[250px] leading-tight rotate-[-5deg]">
               Better tools.<br/>Brighter spaces.
            </div>
         </div>
