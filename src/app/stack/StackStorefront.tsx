@@ -2,7 +2,7 @@
 import { useState } from "react";
 import FilterSidebar from "@/components/FilterSidebar";
 import ProductCarousel from "@/components/ProductCarousel";
-import { LayoutTemplate, MonitorPlay, Code2, Package, LayoutGrid } from "lucide-react";
+import { LayoutTemplate, MonitorPlay, Code2, Terminal, LayoutGrid } from "lucide-react";
 
 const sectionStyles: Record<string, {
   titleColor: string,
@@ -37,11 +37,12 @@ const sectionStyles: Record<string, {
     description: 'Drop-in React components with accessibility and performance built-in.',
   },
   'Bundles': {
+    // TECH-SAVVY BUNDLE STYLING
     titleColor: 'text-white',
-    eyebrowColor: 'text-[#f4cfc3]',
-    descColor: 'text-white/70',
-    icon: <Package className="w-4 h-4" />,
-    eyebrow: 'Complete collections. Better value.',
+    eyebrowColor: 'text-cyan-400 font-mono', // Monospace cyan text
+    descColor: 'text-cyan-100/60',
+    icon: <Terminal className="w-4 h-4 text-cyan-400" />,
+    eyebrow: 'sys.bundle_collection.init()',
     description: 'Get the ultimate developer toolkit with our curated bundles at a discounted price.',
   },
   'Default': {
@@ -78,7 +79,7 @@ export default function StackStorefront({ allProducts }: { allProducts: any[] })
   return (
     <div className="relative w-full max-w-full">
       
-      {/* BACKGROUND BLOBS (Added to match Prisma) */}
+      {/* BACKGROUND BLOBS */}
       <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-[#f4cfc3] rounded-full mix-blend-multiply filter blur-[100px] opacity-40 pointer-events-none z-0"></div>
       <div className="absolute top-[20%] right-1/4 w-[400px] h-[400px] bg-[#e8f0ea] rounded-full mix-blend-multiply filter blur-[100px] opacity-50 pointer-events-none z-0"></div>
       <div className="absolute bottom-[20%] left-1/3 w-[500px] h-[500px] bg-[#eff1f5] rounded-full mix-blend-multiply filter blur-[120px] opacity-50 pointer-events-none z-0"></div>
@@ -104,13 +105,19 @@ export default function StackStorefront({ allProducts }: { allProducts: any[] })
               return (
                 <section 
                   key={category} 
-                  className={`relative w-full ${
+                  className={`relative w-full overflow-hidden ${
                     isBundle 
-                      ? 'bg-[#0a0a0a]/95 backdrop-blur-2xl border border-white/10 rounded-3xl p-6 md:p-10 shadow-[0_8px_32px_0_rgba(0,0,0,0.2)]' 
+                      // TECH-SAVVY DARK CONTAINER WITH GLOWING CYAN BORDER & GRID
+                      ? 'bg-[#050505] border border-cyan-500/30 ring-1 ring-cyan-500/20 shadow-[0_0_50px_-12px_rgba(6,182,212,0.4)] rounded-3xl p-6 md:p-10' 
                       : 'py-4'
                   }`}
                 >
-                  <div className={`flex flex-col md:flex-row md:justify-between md:items-end gap-2 mb-8 border-b ${isBundle ? 'border-white/10' : 'border-black/10'} pb-4`}>
+                  {/* Tech Grid Background specifically for the Bundle section */}
+                  {isBundle && (
+                    <div className="absolute inset-0 bg-[linear-gradient(to_right,#06b6d40a_1px,transparent_1px),linear-gradient(to_bottom,#06b6d40a_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none"></div>
+                  )}
+
+                  <div className={`relative z-10 flex flex-col md:flex-row md:justify-between md:items-end gap-2 mb-8 border-b ${isBundle ? 'border-cyan-500/20' : 'border-black/10'} pb-4`}>
                     <div>
                       <div className={`flex items-center gap-2 mb-2 text-xs font-bold uppercase tracking-[0.2em] ${style.eyebrowColor}`}>
                         <span className="w-6 h-[1px] bg-current"></span>
@@ -125,7 +132,9 @@ export default function StackStorefront({ allProducts }: { allProducts: any[] })
                     </div>
                   </div>
                   
-                  <ProductCarousel items={items} />
+                  <div className="relative z-10">
+                    <ProductCarousel items={items} />
+                  </div>
                 </section>
               );
             })
