@@ -14,7 +14,7 @@ const sectionStyles: Record<string, {
 }> = {
   'Celebrations': {
     titleColor: 'text-black',
-    eyebrowColor: 'text-[#C77547]',
+    eyebrowColor: 'text-[#C77547]', // Keep the orange
     descColor: 'text-[#A34F22]/80',
     icon: <Heart className="w-4 h-4" />,
     eyebrow: 'For the moments that matter',
@@ -22,30 +22,29 @@ const sectionStyles: Record<string, {
   },
   'Planning': {
     titleColor: 'text-black',
-    eyebrowColor: 'text-[#2C4F42]',
-    descColor: 'text-[#112E25]/80',
+    eyebrowColor: 'text-[#059669]', // Brighter Emerald Green
+    descColor: 'text-[#047857]/80',
     icon: <Compass className="w-4 h-4" />,
     eyebrow: 'Clarity for everyday life',
     description: 'Budget dashboards, household systems, and planners to bring structure and calm to your daily routine.',
   },
   'Creative': {
     titleColor: 'text-black',
-    eyebrowColor: 'text-[#6A5A8A]',
-    descColor: 'text-[#4A3B66]/80',
+    eyebrowColor: 'text-[#8B5CF6]', // Vibrant Violet
+    descColor: 'text-[#6D28D9]/80',
     icon: <PenTool className="w-4 h-4" />,
     eyebrow: 'Make space for creativity',
     description: 'Journals, digital stickers, and creative kits designed for reflection, memory-keeping, and self-expression.',
   },
   'Home': {
     titleColor: 'text-black',
-    eyebrowColor: 'text-[#7A5C4A]',
-    descColor: 'text-[#5C4033]/80',
+    eyebrowColor: 'text-[#D97706]', // Bright Amber/Orange-Brown
+    descColor: 'text-[#B45309]/80',
     icon: <Home className="w-4 h-4" />,
     eyebrow: 'Make your space work beautifully',
     description: 'Room makeover guides, organization systems, and design resources for a home you truly love.',
   },
   'Bundles': {
-    // Text changed to white/light to contrast with the dark container
     titleColor: 'text-white',
     eyebrowColor: 'text-[#f4cfc3]', 
     descColor: 'text-white/70',
@@ -86,7 +85,6 @@ export default function PrismaStorefront({ allProducts }: { allProducts: any[] }
 
   return (
     <div className="relative w-full max-w-full">
-      {/* Main Content */}
       <div className="relative z-10 flex flex-col md:flex-row gap-8 lg:gap-12 items-start mt-6 md:mt-12 w-full max-w-full">
         <FilterSidebar 
           type="prisma" 
@@ -102,21 +100,18 @@ export default function PrismaStorefront({ allProducts }: { allProducts: any[] }
           ) : (
             sortedCategories.map(([category, items]: [string, any]) => {
               const style = sectionStyles[category] || sectionStyles['Default'];
-              const isBundles = category === 'Bundles';
+              const isBundle = category === 'Bundles';
               
               return (
                 <section 
                   key={category} 
-                  // Conditional styling: Dark glass container for Bundles, transparent for the rest
                   className={`relative w-full ${
-                    isBundles 
+                    isBundle 
                       ? 'bg-[#0a0a0a]/95 backdrop-blur-2xl border border-white/10 rounded-3xl p-6 md:p-10 shadow-[0_8px_32px_0_rgba(0,0,0,0.2)]' 
                       : 'py-4'
                   }`}
                 >
-                  
-                  {/* Section Header */}
-                  <div className={`flex flex-col md:flex-row md:justify-between md:items-end gap-2 mb-8 border-b ${isBundles ? 'border-white/10' : 'border-black/10'} pb-4`}>
+                  <div className={`flex flex-col md:flex-row md:justify-between md:items-end gap-2 mb-8 border-b ${isBundle ? 'border-white/10' : 'border-black/10'} pb-4`}>
                     <div>
                       <div className={`flex items-center gap-2 mb-2 text-xs font-bold uppercase tracking-[0.2em] ${style.eyebrowColor}`}>
                         <span className="w-6 h-[1px] bg-current"></span>
