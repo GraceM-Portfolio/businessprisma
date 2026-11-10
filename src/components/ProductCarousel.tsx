@@ -44,13 +44,13 @@ export default function ProductCarousel({ items, theme = 'light' }: { items: any
         </button>
       )}
 
-      {/* REDUCED PADDING HERE (pb-2 pt-4) */}
       <div 
         ref={scrollRef}
         className="flex-1 flex overflow-x-auto gap-4 no-scrollbar pb-2 pt-4 scroll-smooth w-full"
       >
         {items.map((product: any) => (
-          <div key={product.id} className="shrink-0 w-[85vw] sm:w-[320px] lg:w-[340px]">
+          // FIX: Increased width to 380px for desktop
+          <div key={product.id} className="shrink-0 w-[90vw] sm:w-[340px] lg:w-[380px]">
             <ProductCard product={product} theme={theme} />
           </div>
         ))}
