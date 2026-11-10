@@ -32,7 +32,7 @@ export default function ProductCarousel({ items, theme = 'light' }: { items: any
   if (!items || items.length === 0) return null;
 
   return (
-    <div className="flex items-center gap-4 w-full max-w-full">
+    <div className="flex items-center gap-4 w-full">
       {items.length > 3 && (
         <button 
           onClick={() => scroll('left')}
@@ -44,16 +44,22 @@ export default function ProductCarousel({ items, theme = 'light' }: { items: any
         </button>
       )}
 
+      {/* 
+        FULL-BLEED MAGIC: 
+        mr-[-1rem] sm:mr-[-1.5rem] lg:mr-[-2rem] 
+        This pulls the carousel track out of the page padding so it touches the screen edge.
+      */}
       <div 
         ref={scrollRef}
-        className="flex-1 flex overflow-x-auto gap-4 no-scrollbar pb-2 pt-4 scroll-smooth w-full"
+        className="flex-1 flex overflow-x-auto gap-4 no-scrollbar pb-2 pt-4 scroll-smooth w-full pr-4 sm:pr-6 lg:pr-8"
       >
         {items.map((product: any) => (
-          // INCREASED WIDTH: w-[420px] on large screens
-          <div key={product.id} className="shrink-0 w-[90vw] sm:w-[360px] lg:w-[420px]">
+          <div key={product.id} className="shrink-0 w-[90vw] sm:w-[360px] lg:w-[400px]">
             <ProductCard product={product} theme={theme} />
           </div>
         ))}
+        {/* Spacer to ensure the last card isn't flush against the edge when fully scrolled */}
+        <div className="w-4 shrink-0"></div>
       </div>
 
       {items.length > 3 && (
