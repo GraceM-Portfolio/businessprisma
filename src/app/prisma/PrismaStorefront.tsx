@@ -14,7 +14,7 @@ const sectionStyles: Record<string, {
 }> = {
   'Celebrations': {
     titleColor: 'text-black',
-    eyebrowColor: 'text-[#C77547]', // Keep the orange
+    eyebrowColor: 'text-[#C77547]', 
     descColor: 'text-[#A34F22]/80',
     icon: <Heart className="w-4 h-4" />,
     eyebrow: 'For the moments that matter',
@@ -22,7 +22,7 @@ const sectionStyles: Record<string, {
   },
   'Planning': {
     titleColor: 'text-black',
-    eyebrowColor: 'text-[#059669]', // Brighter Emerald Green
+    eyebrowColor: 'text-[#059669]', 
     descColor: 'text-[#047857]/80',
     icon: <Compass className="w-4 h-4" />,
     eyebrow: 'Clarity for everyday life',
@@ -30,7 +30,7 @@ const sectionStyles: Record<string, {
   },
   'Creative': {
     titleColor: 'text-black',
-    eyebrowColor: 'text-[#8B5CF6]', // Vibrant Violet
+    eyebrowColor: 'text-[#8B5CF6]', 
     descColor: 'text-[#6D28D9]/80',
     icon: <PenTool className="w-4 h-4" />,
     eyebrow: 'Make space for creativity',
@@ -38,18 +38,19 @@ const sectionStyles: Record<string, {
   },
   'Home': {
     titleColor: 'text-black',
-    eyebrowColor: 'text-[#D97706]', // Bright Amber/Orange-Brown
+    eyebrowColor: 'text-[#D97706]', 
     descColor: 'text-[#B45309]/80',
     icon: <Home className="w-4 h-4" />,
     eyebrow: 'Make your space work beautifully',
     description: 'Room makeover guides, organization systems, and design resources for a home you truly love.',
   },
   'Bundles': {
+    // LUXURY PRISMA BUNDLE STYLING
     titleColor: 'text-white',
-    eyebrowColor: 'text-[#f4cfc3]', 
-    descColor: 'text-white/70',
-    icon: <Package className="w-4 h-4" />,
-    eyebrow: 'Complete collections. Better value.',
+    eyebrowColor: 'text-[#f4cfc3] font-bold tracking-[0.2em]', 
+    descColor: 'text-[#f4cfc3]/80',
+    icon: <Package className="w-4 h-4 text-[#f4cfc3]" />,
+    eyebrow: 'Exclusive Collections',
     description: 'Curated bundles that combine our best products so you get everything you need at a premium discount.',
   },
   'Default': {
@@ -90,6 +91,7 @@ export default function PrismaStorefront({ allProducts }: { allProducts: any[] }
           type="prisma" 
           activeFilter={activeFilter} 
           setActiveFilter={setActiveFilter} 
+          theme="light"
         />
         
         <div className="flex-1 space-y-16 md:space-y-24 w-full min-w-0">
@@ -105,15 +107,21 @@ export default function PrismaStorefront({ allProducts }: { allProducts: any[] }
               return (
                 <section 
                   key={category} 
-                  className={`relative w-full ${
+                  className={`relative w-full overflow-hidden ${
                     isBundle 
-                      ? 'bg-[#0a0a0a]/95 backdrop-blur-2xl border border-white/10 rounded-3xl p-6 md:p-10 shadow-[0_8px_32px_0_rgba(0,0,0,0.2)]' 
+                      // DEEP PLUM BACKGROUND WITH PEACH GLOW & BORDER
+                      ? 'bg-gradient-to-br from-[#1c1218] via-[#0d080a] to-black border border-[#f4cfc3]/30 shadow-[0_0_40px_-10px_rgba(244,207,195,0.25)] rounded-3xl p-6 md:p-10' 
                       : 'py-4'
                   }`}
                 >
-                  <div className={`flex flex-col md:flex-row md:justify-between md:items-end gap-2 mb-8 border-b ${isBundle ? 'border-white/10' : 'border-black/10'} pb-4`}>
+                  {/* Subtle glowing orb in the background */}
+                  {isBundle && (
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-[#f4cfc3]/10 rounded-full blur-[80px] pointer-events-none"></div>
+                  )}
+
+                  <div className={`relative z-10 flex flex-col md:flex-row md:justify-between md:items-end gap-2 mb-8 border-b ${isBundle ? 'border-[#f4cfc3]/20' : 'border-black/10'} pb-4`}>
                     <div>
-                      <div className={`flex items-center gap-2 mb-2 text-xs font-bold uppercase tracking-[0.2em] ${style.eyebrowColor}`}>
+                      <div className={`flex items-center gap-2 mb-2 text-xs uppercase ${style.eyebrowColor}`}>
                         <span className="w-6 h-[1px] bg-current"></span>
                         {style.eyebrow}
                       </div>
@@ -126,7 +134,9 @@ export default function PrismaStorefront({ allProducts }: { allProducts: any[] }
                     </div>
                   </div>
                   
-                  <ProductCarousel items={items} />
+                  <div className="relative z-10">
+                    <ProductCarousel items={items} theme="dark" />
+                  </div>
                 </section>
               );
             })
