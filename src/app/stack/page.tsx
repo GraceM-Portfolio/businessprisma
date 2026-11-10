@@ -20,12 +20,16 @@ export default async function StackPage() {
   ) || [];
 
   return (
-    // Changed to dark background for the whole page
     <div className="bg-[#0a0a0a] min-h-screen text-white pb-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 md:pt-12">
         
-        {/* HERO SECTION */}
-        <div className="bg-black text-white rounded-3xl p-8 lg:p-16 mb-8 border border-white/10 shadow-2xl relative overflow-hidden">
+        {/* 
+          STICKY HERO SECTION
+          - sticky top-24: Locks it just below the header
+          - z-0: Keeps it behind the products
+        */}
+        <div className="sticky top-24 z-0 bg-black text-white rounded-3xl p-8 lg:p-16 mb-8 border border-white/10 shadow-2xl overflow-hidden">
+          {/* Subtle tech grid pattern */}
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff0a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0a_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none"></div>
           
           <div className="relative z-10">
@@ -42,7 +46,16 @@ export default async function StackPage() {
           </div>
         </div>
 
-        <StackStorefront allProducts={stackProducts} />
+        {/* 
+          SCROLLING PRODUCTS SECTION
+          - relative z-10: Brings it above the sticky hero
+          - bg-[#0a0a0a]: Solid background to hide the hero underneath
+          - shadow-[0_-20px_50px_rgba(0,0,0,0.5)]: Adds a beautiful shadow as it slides over the hero
+        */}
+        <div className="relative z-10 bg-[#0a0a0a] pt-10 pb-20 rounded-t-3xl shadow-[0_-20px_50px_rgba(0,0,0,0.8)]">
+          <StackStorefront allProducts={stackProducts} />
+        </div>
+
       </div>
     </div>
   );
