@@ -45,11 +45,11 @@ const sectionStyles: Record<string, {
     description: 'Room makeover guides, organization systems, and design resources for a home you truly love.',
   },
   'Bundles': {
-    // LUXURY PRISMA BUNDLE STYLING
+    // CHAMPAGNE & WHITE TEXT FOR CHOCOLATE BACKGROUND
     titleColor: 'text-white',
-    eyebrowColor: 'text-[#f4cfc3] font-bold tracking-[0.2em]', 
+    eyebrowColor: 'text-[#d4a373] font-bold tracking-[0.2em]', 
     descColor: 'text-[#f4cfc3]/80',
-    icon: <Package className="w-4 h-4 text-[#f4cfc3]" />,
+    icon: <Package className="w-4 h-4 text-[#d4a373]" />,
     eyebrow: 'Exclusive Collections',
     description: 'Curated bundles that combine our best products so you get everything you need at a premium discount.',
   },
@@ -109,17 +109,17 @@ export default function PrismaStorefront({ allProducts }: { allProducts: any[] }
                   key={category} 
                   className={`relative w-full overflow-hidden ${
                     isBundle 
-                      // DEEP PLUM BACKGROUND WITH PEACH GLOW & BORDER
-                      ? 'bg-gradient-to-br from-[#1c1218] via-[#0d080a] to-black border border-[#f4cfc3]/30 shadow-[0_0_40px_-10px_rgba(244,207,195,0.25)] rounded-3xl p-6 md:p-10' 
+                      // TRANSLUCENT CHOCOLATE GLASS CONTAINER
+                      ? 'bg-[#2b1a14]/80 backdrop-blur-2xl border border-[#d4a373]/30 shadow-[0_8px_32px_0_rgba(43,26,20,0.3)] rounded-3xl p-6 md:p-10' 
                       : 'py-4'
                   }`}
                 >
-                  {/* Subtle glowing orb in the background */}
+                  {/* Subtle glowing warm orb in the background */}
                   {isBundle && (
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-[#f4cfc3]/10 rounded-full blur-[80px] pointer-events-none"></div>
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-[#d4a373]/10 rounded-full blur-[80px] pointer-events-none"></div>
                   )}
 
-                  <div className={`relative z-10 flex flex-col md:flex-row md:justify-between md:items-end gap-2 mb-8 border-b ${isBundle ? 'border-[#f4cfc3]/20' : 'border-black/10'} pb-4`}>
+                  <div className={`relative z-10 flex flex-col md:flex-row md:justify-between md:items-end gap-2 mb-8 border-b ${isBundle ? 'border-[#d4a373]/20' : 'border-black/10'} pb-4`}>
                     <div>
                       <div className={`flex items-center gap-2 mb-2 text-xs uppercase ${style.eyebrowColor}`}>
                         <span className="w-6 h-[1px] bg-current"></span>
