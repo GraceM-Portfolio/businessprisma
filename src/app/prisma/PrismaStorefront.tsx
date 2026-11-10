@@ -13,39 +13,39 @@ const sectionStyles: Record<string, {
   description: string
 }> = {
   'Celebrations': {
-    titleColor: 'text-[#A34F22]',    // Dark Orange/Terracotta
-    eyebrowColor: 'text-[#C77547]',
+    titleColor: 'text-black',        // Main title is black
+    eyebrowColor: 'text-[#C77547]',  // Eyebrow keeps its color
     descColor: 'text-[#A34F22]/80',
     icon: <Heart className="w-4 h-4" />,
     eyebrow: 'For the moments that matter',
     description: 'Beautifully designed wedding planners, invitations, and celebration kits for life\'s biggest days.',
   },
   'Planning': {
-    titleColor: 'text-[#112E25]',    // Deep Forest Green
-    eyebrowColor: 'text-[#2C4F42]',
+    titleColor: 'text-black',        // Main title is black
+    eyebrowColor: 'text-[#2C4F42]',  // Eyebrow keeps its color
     descColor: 'text-[#112E25]/80',
     icon: <Compass className="w-4 h-4" />,
     eyebrow: 'Clarity for everyday life',
     description: 'Budget dashboards, household systems, and planners to bring structure and calm to your daily routine.',
   },
   'Creative': {
-    titleColor: 'text-[#4A3B66]',    // Dark Plum/Purple
-    eyebrowColor: 'text-[#6A5A8A]',
+    titleColor: 'text-black',        // Main title is black
+    eyebrowColor: 'text-[#6A5A8A]',  // Eyebrow keeps its color
     descColor: 'text-[#4A3B66]/80',
     icon: <PenTool className="w-4 h-4" />,
     eyebrow: 'Make space for creativity',
     description: 'Journals, digital stickers, and creative kits designed for reflection, memory-keeping, and self-expression.',
   },
   'Home': {
-    titleColor: 'text-[#5C4033]',    // Dark Brown/Mocha
-    eyebrowColor: 'text-[#7A5C4A]',
+    titleColor: 'text-black',        // Main title is black
+    eyebrowColor: 'text-[#7A5C4A]',  // Eyebrow keeps its color
     descColor: 'text-[#5C4033]/80',
     icon: <Home className="w-4 h-4" />,
     eyebrow: 'Make your space work beautifully',
     description: 'Room makeover guides, organization systems, and design resources for a home you truly love.',
   },
   'Bundles': {
-    titleColor: 'text-black',        // Changed to black to fit the light background
+    titleColor: 'text-black',
     eyebrowColor: 'text-black/60',
     descColor: 'text-black/70',
     icon: <Package className="w-4 h-4" />,
@@ -104,7 +104,6 @@ export default function PrismaStorefront({ allProducts }: { allProducts: any[] }
               const isBundles = category === 'Bundles';
               
               return (
-                // Removed all background, padding, and border styles from the section wrapper
                 <section key={category} className="relative w-full">
                   
                   {/* Section Header */}
