@@ -14,7 +14,8 @@ export default function ProductCarousel({ items }: { items: any[] }) {
       
       const cardWidth = firstCard.clientWidth;
       const gap = 24; // Matches 'gap-6'
-      const scrollAmount = (cardWidth + gap) * 3; // Scroll exactly 3 cards
+      // Calculates exactly 3 cards + the gaps between them
+      const scrollAmount = (cardWidth + gap) * 3; 
 
       const isAtStart = current.scrollLeft <= 10;
       const isAtEnd = current.scrollLeft + current.clientWidth >= current.scrollWidth - 10;
@@ -38,10 +39,9 @@ export default function ProductCarousel({ items }: { items: any[] }) {
   if (!items || items.length === 0) return null;
 
   return (
-    // Flex container to hold the arrows and the track together
     <div className="flex items-center gap-4 w-full max-w-full">
       
-      {/* Left Arrow - Desktop Only, sitting outside the track */}
+      {/* Left Arrow */}
       {items.length > 3 && (
         <button 
           onClick={() => scroll('left')}
@@ -52,19 +52,20 @@ export default function ProductCarousel({ items }: { items: any[] }) {
         </button>
       )}
 
-      {/* Scrollable Track - flex-1 allows it to fill the space between arrows */}
+      {/* Scrollable Track */}
       <div 
         ref={scrollRef}
         className="flex-1 flex overflow-x-auto gap-6 no-scrollbar py-4 scroll-smooth w-full"
       >
         {items.map((product: any) => (
-          <div key={product.id} className="shrink-0 w-[85vw] sm:w-[280px]">
+          // UPDATED WIDTH: w-[320px] on mobile, w-[340px] on desktop
+          <div key={product.id} className="shrink-0 w-[85vw] sm:w-[320px] lg:w-[340px]">
             <ProductCard product={product} />
           </div>
         ))}
       </div>
 
-      {/* Right Arrow - Desktop Only, sitting outside the track */}
+      {/* Right Arrow */}
       {items.length > 3 && (
         <button 
           onClick={() => scroll('right')}
