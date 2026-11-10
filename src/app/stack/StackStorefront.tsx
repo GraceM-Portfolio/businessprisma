@@ -77,6 +77,13 @@ export default function StackStorefront({ allProducts }: { allProducts: any[] })
 
   return (
     <div className="relative w-full max-w-full">
+      
+      {/* BACKGROUND BLOBS (Added to match Prisma) */}
+      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-[#f4cfc3] rounded-full mix-blend-multiply filter blur-[100px] opacity-40 pointer-events-none z-0"></div>
+      <div className="absolute top-[20%] right-1/4 w-[400px] h-[400px] bg-[#e8f0ea] rounded-full mix-blend-multiply filter blur-[100px] opacity-50 pointer-events-none z-0"></div>
+      <div className="absolute bottom-[20%] left-1/3 w-[500px] h-[500px] bg-[#eff1f5] rounded-full mix-blend-multiply filter blur-[120px] opacity-50 pointer-events-none z-0"></div>
+
+      {/* Main Content */}
       <div className="relative z-10 flex flex-col md:flex-row gap-8 lg:gap-12 items-start mt-6 md:mt-12 w-full max-w-full">
         <FilterSidebar 
           type="stack" 
